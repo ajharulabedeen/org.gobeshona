@@ -1,0 +1,56 @@
+<!-- Start : Main div-->
+<div ng-controller="articleController" class="row" ng-init="article_init()">
+    <br><br>
+    <div class="col-sm-10 col-sm-offset-1">
+        <!--Start : Search Article -->
+        <form ng-submit="">
+            <div class="row">
+                <div class="col-sm-2 col-sm-offset-4">
+                    <p class="pull-right" style="font-size: 15px; font-weight: bold; padding-top: 5px">
+                    Search by 
+                    </p>
+                </div>
+                <div class="col-sm-2">
+                    <select style="font-size: 15px; font-weight: bold; margin-top: 5px; width:100%" id="search_type">
+                        <option value="articleSubject" selected>Subject</option>
+                        <option value="articleType">Type</option>
+                        <!-- <option value="articleContent">Content</option> -->
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <div class="has-feedback">
+                            <input type="text" class="form-control input-sm" required="required" placeholder="Search Article" ng-model="article.searchbox" ng-change="search()">
+                            <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </form>
+        <!-- End: Search Article -->
+        <br>
+        <!--Start : Article Without Content-->
+        <div ng-repeat="x in articles">
+                <div class="box box-primary">
+                    <div class="box-body">
+                        <!--user info bar for article view-->
+                        <div style="background-color: aquamarine" >
+                            <button style="background-color: aquamarine"  class="btn btn-flat">
+                                Name:       {{x.userFirstName }} {{x.userLastName}} 
+                                ---Joined :    {{x.joinDate}} 
+                                ---Messaging Interest :{{x.communicationInterest}} 
+                                ---Up vote :   {{x.totalUpVote }}
+                                ---Down Vote : {{x.totalDownVote}} 
+                            </button>
+                        </div>
+                        <!--user info bar for article view-->
+                        <h5><b>Article Date :</b> {{ x.articleDate}}</h5>
+                        <h3><a href="#!article/view/{{x.articleID}}"> <b> Article Subject :</b> {{ x.articleSubject}}</a></h3>
+                        <h4><b>Article Type : </b>{{ x.articleType}}</h4>
+                    </div>
+                </div>
+            </div>
+        <!-- End : Article Without Content-->
+        </div>
+    </div>
+<!--End : Main div-->

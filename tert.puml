@@ -1,0 +1,555 @@
+@startuml
+annotation java.lang.Override
+annotation org.hibernate.validator.constraints.Email
+annotation org.hibernate.validator.constraints.Length
+annotation org.hibernate.validator.constraints.NotEmpty
+annotation org.springframework.boot.autoconfigure.SpringBootApplication
+annotation org.springframework.web.bind.annotation.PathVariable
+annotation org.springframework.web.bind.annotation.RequestBody
+annotation org.springframework.web.bind.annotation.RequestMapping
+annotation org.springframework.web.bind.annotation.RequestParam
+annotation org.springframework.web.bind.annotation.RestController
+class com.gobeshonabd.GobeshonabdfinalApplication
+class com.gobeshonabd.ServletInitializer
+class com.gobeshonabd.TestController
+class com.gobeshonabd.configs.DateUtil
+class com.gobeshonabd.configs.HibernateUtil
+class com.gobeshonabd.configs.SessionFactorySingletron
+class com.gobeshonabd.configs.SpringContextSingletron
+class com.gobeshonabd.controllers.Articles_CRUD
+class com.gobeshonabd.controllers.Comment_Articles_CRUD
+class com.gobeshonabd.controllers.Controller_Messages
+class com.gobeshonabd.controllers.Controllers_LogOut
+class com.gobeshonabd.controllers.Controllers_QuestionAndAnswer
+class com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment
+class com.gobeshonabd.controllers.Controllers_Services
+class com.gobeshonabd.controllers.Controllers_Users
+class com.gobeshonabd.persistence.DAO_Articles_Comment_Impl
+class com.gobeshonabd.persistence.DAO_Articles_Impl
+class com.gobeshonabd.persistence.DAO_Follow_Impl
+class com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl
+class com.gobeshonabd.persistence.DAO_Messages_Impl
+class com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl
+class com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_Impl
+class com.gobeshonabd.persistence.DAO_Users_CRUD_Impl
+class com.gobeshonabd.pojos.Articles
+class com.gobeshonabd.pojos.ArticlesComments
+class com.gobeshonabd.pojos.ArticlesCommentsVotes
+class com.gobeshonabd.pojos.ArticlesComments_Insert
+class com.gobeshonabd.pojos.ArticlesVotes
+class com.gobeshonabd.pojos.Articles_Concise_View
+class com.gobeshonabd.pojos.Articles_Insert
+class com.gobeshonabd.pojos.Follow
+class com.gobeshonabd.pojos.Messages
+class com.gobeshonabd.pojos.QuestionAndAnswer
+class com.gobeshonabd.pojos.QuestionAndAnswerComment
+class com.gobeshonabd.pojos.QuestionAndAnswerCommentVotes
+class com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert
+class com.gobeshonabd.pojos.QuestionAndAnswerVotes
+class com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+class com.gobeshonabd.pojos.QuestionAndAnswer_View_Summury
+class com.gobeshonabd.pojos.Users
+class com.gobeshonabd.pojos.Users_Public_View
+class com.gobeshonabd.search.DAO_Search_Users_Impl
+class com.gobeshonabd.services.Services_Articles_CRUD_Impl
+class com.gobeshonabd.services.Services_Articles_Comments_CRUD_Impl
+class com.gobeshonabd.services.Services_Follow_Impl
+class com.gobeshonabd.services.Services_Messages_Impl
+class com.gobeshonabd.services.Services_QuestionAndAnswar_Impl
+class com.gobeshonabd.services.Services_QuestionAndAnswerComment_Impl
+class com.gobeshonabd.services.Services_Users_CRUD_Impl
+class com.gobeshonabd.voting.Controller_Voteing
+class com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl
+class com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl
+class com.gobeshonabd.voting.DAO_Vote_Article_Impl
+class com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl
+class com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl
+class com.gobeshonabd.voting.Services_Vote_ArticleComment_Impl
+class com.gobeshonabd.voting.Services_Vote_Article_Impl
+class com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_Impl
+class com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_Impl
+class java.text.DateFormat
+class java.text.SimpleDateFormat
+class java.util.ArrayList
+class java.util.Date
+class java.util.Iterator
+class java.util.List
+class java.util.Set
+class javax.validation.constraints.Min
+class javax.validation.constraints.Size
+class org.hibernate.Criteria
+class org.hibernate.Query
+class org.hibernate.Session
+class org.hibernate.SessionFactory
+class org.hibernate.Transaction
+class org.hibernate.cfg.Configuration
+class org.hibernate.criterion.Criterion
+class org.hibernate.criterion.LogicalExpression
+class org.hibernate.criterion.MatchMode
+class org.hibernate.criterion.Order
+class org.hibernate.criterion.ProjectionList
+class org.hibernate.criterion.Projections
+class org.hibernate.criterion.Restrictions
+class org.springframework.beans.factory.annotation.Required
+class org.springframework.boot.SpringApplication
+class org.springframework.boot.builder.SpringApplicationBuilder
+class org.springframework.boot.web.support.SpringBootServletInitializer
+class org.springframework.context.ApplicationContext
+class org.springframework.context.support.ClassPathXmlApplicationContext
+class org.springframework.web.bind.annotation.RequestMethod
+interface com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl
+interface com.gobeshonabd.configs.SpringApplicationContextInterface
+interface com.gobeshonabd.persistence.DAO_Articles_Comment_I
+interface com.gobeshonabd.persistence.DAO_Articles_I
+interface com.gobeshonabd.persistence.DAO_Follow_I
+interface com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_I
+interface com.gobeshonabd.persistence.DAO_Messages_I
+interface com.gobeshonabd.persistence.DAO_QuestionAndAnswar_I
+interface com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_I
+interface com.gobeshonabd.persistence.DAO_Users_CRUD_I
+interface com.gobeshonabd.search.DAO_Search_Users_I
+interface com.gobeshonabd.services.Services_Articles_CRUD_I
+interface com.gobeshonabd.services.Services_Articles_Comments_CRUD_I
+interface com.gobeshonabd.services.Services_Follow_I
+interface com.gobeshonabd.services.Services_Messages_I
+interface com.gobeshonabd.services.Services_QuestionAndAnswar_I
+interface com.gobeshonabd.services.Services_QuestionAndAnswerComment_I
+interface com.gobeshonabd.services.Services_User_PasswordEncryption_I
+interface com.gobeshonabd.services.Services_Users_CRUD_I
+interface com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_I
+interface com.gobeshonabd.voting.DAO_Vote_ArticleComment_I
+interface com.gobeshonabd.voting.DAO_Vote_Article_I
+interface com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_I
+interface com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_I
+interface com.gobeshonabd.voting.Get_Bean_DAO_Generel_Vote_Save_Read_Impl
+interface com.gobeshonabd.voting.Services_Vote_ArticleComment_I
+interface com.gobeshonabd.voting.Services_Vote_Article_I
+interface com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_I
+interface com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_I
+com.gobeshonabd.GobeshonabdfinalApplication ..> org.springframework.boot.autoconfigure.SpringBootApplication
+com.gobeshonabd.GobeshonabdfinalApplication ..> org.springframework.boot.SpringApplication
+com.gobeshonabd.ServletInitializer ..> java.lang.Override
+com.gobeshonabd.ServletInitializer ..> org.springframework.boot.builder.SpringApplicationBuilder
+com.gobeshonabd.ServletInitializer --|> org.springframework.boot.web.support.SpringBootServletInitializer
+com.gobeshonabd.TestController ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.TestController ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.configs.DateUtil ..> java.text.DateFormat
+com.gobeshonabd.configs.DateUtil ..> java.text.SimpleDateFormat
+com.gobeshonabd.configs.DateUtil ..> java.util.Date
+com.gobeshonabd.configs.SessionFactorySingletron ..> org.hibernate.SessionFactory
+com.gobeshonabd.configs.SessionFactorySingletron ..> org.hibernate.cfg.Configuration
+com.gobeshonabd.configs.SpringContextSingletron ..> org.springframework.context.ApplicationContext
+com.gobeshonabd.configs.SpringContextSingletron ..> org.springframework.context.support.ClassPathXmlApplicationContext
+com.gobeshonabd.controllers.Articles_CRUD ..> org.springframework.web.bind.annotation.PathVariable
+com.gobeshonabd.controllers.Articles_CRUD ..> org.springframework.web.bind.annotation.RequestBody
+com.gobeshonabd.controllers.Articles_CRUD ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.controllers.Articles_CRUD ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.controllers.Articles_CRUD ..> com.gobeshonabd.configs.SpringContextSingletron
+com.gobeshonabd.controllers.Articles_CRUD ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.controllers.Articles_CRUD ..> com.gobeshonabd.pojos.Articles_Insert
+com.gobeshonabd.controllers.Articles_CRUD ..> java.util.List
+com.gobeshonabd.controllers.Articles_CRUD ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.controllers.Articles_CRUD --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.controllers.Articles_CRUD ..> com.gobeshonabd.services.Services_Articles_CRUD_I
+com.gobeshonabd.controllers.Comment_Articles_CRUD ..> org.springframework.web.bind.annotation.RequestBody
+com.gobeshonabd.controllers.Comment_Articles_CRUD ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.controllers.Comment_Articles_CRUD ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.controllers.Comment_Articles_CRUD ..> com.gobeshonabd.pojos.ArticlesComments
+com.gobeshonabd.controllers.Comment_Articles_CRUD ..> com.gobeshonabd.pojos.ArticlesComments_Insert
+com.gobeshonabd.controllers.Comment_Articles_CRUD ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.controllers.Comment_Articles_CRUD --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.controllers.Comment_Articles_CRUD ..> com.gobeshonabd.services.Services_Articles_Comments_CRUD_I
+com.gobeshonabd.controllers.Controller_Messages ..> org.springframework.web.bind.annotation.PathVariable
+com.gobeshonabd.controllers.Controller_Messages ..> org.springframework.web.bind.annotation.RequestBody
+com.gobeshonabd.controllers.Controller_Messages ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.controllers.Controller_Messages ..> org.springframework.web.bind.annotation.RequestParam
+com.gobeshonabd.controllers.Controller_Messages ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.controllers.Controller_Messages ..> com.gobeshonabd.pojos.Messages
+com.gobeshonabd.controllers.Controller_Messages ..> java.util.List
+com.gobeshonabd.controllers.Controller_Messages ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.controllers.Controller_Messages --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.controllers.Controller_Messages ..> com.gobeshonabd.services.Services_Messages_I
+com.gobeshonabd.controllers.Controllers_LogOut ..> org.springframework.web.bind.annotation.RequestBody
+com.gobeshonabd.controllers.Controllers_LogOut ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.controllers.Controllers_LogOut ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.controllers.Controllers_LogOut ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.controllers.Controllers_LogOut ..> java.util.List
+com.gobeshonabd.controllers.Controllers_LogOut ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.controllers.Controllers_LogOut ..> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.controllers.Controllers_LogOut ..> com.gobeshonabd.services.Services_Articles_CRUD_I
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> org.springframework.web.bind.annotation.PathVariable
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> org.springframework.web.bind.annotation.RequestBody
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> com.gobeshonabd.pojos.QuestionAndAnswer
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> java.util.List
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswer ..> com.gobeshonabd.services.Services_QuestionAndAnswar_I
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment ..> org.springframework.web.bind.annotation.RequestBody
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment ..> com.gobeshonabd.pojos.QuestionAndAnswerComment
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment ..> com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.controllers.Controllers_QuestionAndAnswerComment ..> com.gobeshonabd.services.Services_QuestionAndAnswerComment_I
+com.gobeshonabd.controllers.Controllers_Services ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.controllers.Controllers_Services ..> com.gobeshonabd.pojos.Follow
+com.gobeshonabd.controllers.Controllers_Services ..> java.util.List
+com.gobeshonabd.controllers.Controllers_Services ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.controllers.Controllers_Services --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.controllers.Controllers_Services ..> com.gobeshonabd.services.Services_Follow_I
+com.gobeshonabd.controllers.Controllers_Users ..> org.springframework.web.bind.annotation.PathVariable
+com.gobeshonabd.controllers.Controllers_Users ..> org.springframework.web.bind.annotation.RequestBody
+com.gobeshonabd.controllers.Controllers_Users ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.controllers.Controllers_Users ..> org.springframework.web.bind.annotation.RequestParam
+com.gobeshonabd.controllers.Controllers_Users ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.controllers.Controllers_Users ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.controllers.Controllers_Users ..> com.gobeshonabd.pojos.Users_Public_View
+com.gobeshonabd.controllers.Controllers_Users ..> java.util.List
+com.gobeshonabd.controllers.Controllers_Users ..> org.hibernate.Session
+com.gobeshonabd.controllers.Controllers_Users ..> org.hibernate.SessionFactory
+com.gobeshonabd.controllers.Controllers_Users ..> org.hibernate.Transaction
+com.gobeshonabd.controllers.Controllers_Users ..> org.hibernate.cfg.Configuration
+com.gobeshonabd.controllers.Controllers_Users ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.controllers.Controllers_Users --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.controllers.Controllers_Users ..> com.gobeshonabd.services.Services_Users_CRUD_I
+com.gobeshonabd.persistence.DAO_Articles_Comment_Impl ..> java.lang.Override
+com.gobeshonabd.persistence.DAO_Articles_Comment_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.persistence.DAO_Articles_Comment_Impl ..> com.gobeshonabd.pojos.ArticlesComments
+com.gobeshonabd.persistence.DAO_Articles_Comment_Impl ..> com.gobeshonabd.pojos.ArticlesComments_Insert
+com.gobeshonabd.persistence.DAO_Articles_Comment_Impl ..> org.hibernate.Session
+com.gobeshonabd.persistence.DAO_Articles_Comment_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.persistence.DAO_Articles_Comment_Impl --|> com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl
+com.gobeshonabd.persistence.DAO_Articles_Comment_Impl --|> com.gobeshonabd.persistence.DAO_Articles_Comment_I
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> java.lang.Override
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> com.gobeshonabd.pojos.Articles_Concise_View
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> com.gobeshonabd.pojos.Articles_Insert
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> java.util.ArrayList
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> java.util.Iterator
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> java.util.List
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> org.hibernate.Query
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> org.hibernate.Session
+com.gobeshonabd.persistence.DAO_Articles_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.persistence.DAO_Articles_Impl --|> com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl
+com.gobeshonabd.persistence.DAO_Articles_Impl --|> com.gobeshonabd.persistence.DAO_Articles_I
+com.gobeshonabd.persistence.DAO_Follow_Impl ..> java.lang.Override
+com.gobeshonabd.persistence.DAO_Follow_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.persistence.DAO_Follow_Impl ..> com.gobeshonabd.pojos.Follow
+com.gobeshonabd.persistence.DAO_Follow_Impl ..> java.util.List
+com.gobeshonabd.persistence.DAO_Follow_Impl ..> org.hibernate.Criteria
+com.gobeshonabd.persistence.DAO_Follow_Impl ..> org.hibernate.Session
+com.gobeshonabd.persistence.DAO_Follow_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.persistence.DAO_Follow_Impl ..> org.hibernate.criterion.Restrictions
+com.gobeshonabd.persistence.DAO_Follow_Impl --|> com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl
+com.gobeshonabd.persistence.DAO_Follow_Impl --|> com.gobeshonabd.persistence.DAO_Follow_I
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl ..> java.lang.Override
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl ..> java.util.List
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl ..> org.hibernate.Query
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl ..> org.hibernate.Session
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl ..> org.hibernate.Transaction
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl --|> com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_I
+com.gobeshonabd.persistence.DAO_Messages_Impl ..> java.lang.Override
+com.gobeshonabd.persistence.DAO_Messages_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.persistence.DAO_Messages_Impl ..> com.gobeshonabd.pojos.Messages
+com.gobeshonabd.persistence.DAO_Messages_Impl ..> java.util.List
+com.gobeshonabd.persistence.DAO_Messages_Impl ..> org.hibernate.Criteria
+com.gobeshonabd.persistence.DAO_Messages_Impl ..> org.hibernate.Session
+com.gobeshonabd.persistence.DAO_Messages_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.persistence.DAO_Messages_Impl ..> org.hibernate.criterion.Restrictions
+com.gobeshonabd.persistence.DAO_Messages_Impl --|> com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl
+com.gobeshonabd.persistence.DAO_Messages_Impl --|> com.gobeshonabd.persistence.DAO_Messages_I
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> java.lang.Override
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.Articles_Concise_View
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswer
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswer_View_Summury
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> java.util.ArrayList
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> java.util.Iterator
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> java.util.List
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> org.hibernate.Query
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> org.hibernate.Session
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl --|> com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_Impl --|> com.gobeshonabd.persistence.DAO_QuestionAndAnswar_I
+com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_Impl ..> java.lang.Override
+com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerComment
+com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert
+com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_Impl --|> com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl
+com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_Impl --|> com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_I
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> java.lang.Override
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> com.gobeshonabd.pojos.Users_Public_View
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> java.util.ArrayList
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> java.util.Iterator
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> java.util.List
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> org.hibernate.Criteria
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> org.hibernate.Query
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> org.hibernate.Session
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl --|> com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl
+com.gobeshonabd.persistence.DAO_Users_CRUD_Impl --|> com.gobeshonabd.persistence.DAO_Users_CRUD_I
+com.gobeshonabd.pojos.Articles ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.Articles ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.Articles ..> java.util.Set
+com.gobeshonabd.pojos.Articles ..> org.springframework.beans.factory.annotation.Required
+com.gobeshonabd.pojos.ArticlesComments ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.ArticlesComments ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.ArticlesComments_Insert ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.ArticlesComments_Insert ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.Articles_Insert ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.Articles_Insert ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.Articles_Insert ..> java.util.Set
+com.gobeshonabd.pojos.Articles_Insert ..> org.springframework.beans.factory.annotation.Required
+com.gobeshonabd.pojos.Messages ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.Messages ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.QuestionAndAnswer ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.QuestionAndAnswer ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.QuestionAndAnswer ..> java.util.Set
+com.gobeshonabd.pojos.QuestionAndAnswerComment ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.QuestionAndAnswerComment ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.QuestionAndAnswer_Insert ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.QuestionAndAnswer_Insert ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.QuestionAndAnswer_Insert ..> java.util.Set
+com.gobeshonabd.pojos.Users ..> org.hibernate.validator.constraints.Email
+com.gobeshonabd.pojos.Users ..> org.hibernate.validator.constraints.Length
+com.gobeshonabd.pojos.Users ..> org.hibernate.validator.constraints.NotEmpty
+com.gobeshonabd.pojos.Users ..> java.util.Set
+com.gobeshonabd.pojos.Users ..> javax.validation.constraints.Min
+com.gobeshonabd.pojos.Users ..> javax.validation.constraints.Size
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> java.lang.Override
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> com.gobeshonabd.pojos.Users_Public_View
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> java.util.ArrayList
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> java.util.Iterator
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> java.util.List
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.Criteria
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.Session
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.criterion.Criterion
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.criterion.LogicalExpression
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.criterion.MatchMode
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.criterion.Order
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.criterion.ProjectionList
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.criterion.Projections
+com.gobeshonabd.search.DAO_Search_Users_Impl ..> org.hibernate.criterion.Restrictions
+com.gobeshonabd.search.DAO_Search_Users_Impl --|> com.gobeshonabd.search.DAO_Search_Users_I
+com.gobeshonabd.services.Services_Articles_CRUD_Impl ..> java.lang.Override
+com.gobeshonabd.services.Services_Articles_CRUD_Impl ..> com.gobeshonabd.configs.DateUtil
+com.gobeshonabd.services.Services_Articles_CRUD_Impl ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.services.Services_Articles_CRUD_Impl ..> com.gobeshonabd.pojos.Articles_Concise_View
+com.gobeshonabd.services.Services_Articles_CRUD_Impl ..> com.gobeshonabd.pojos.Articles_Insert
+com.gobeshonabd.services.Services_Articles_CRUD_Impl ..> java.util.List
+com.gobeshonabd.services.Services_Articles_CRUD_Impl ..> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.services.Services_Articles_CRUD_Impl ..> com.gobeshonabd.persistence.DAO_Articles_I
+com.gobeshonabd.services.Services_Articles_CRUD_Impl --|> com.gobeshonabd.services.Services_Articles_CRUD_I
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_Impl ..> java.lang.Override
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_Impl ..> com.gobeshonabd.configs.DateUtil
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_Impl ..> com.gobeshonabd.pojos.ArticlesComments
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_Impl ..> com.gobeshonabd.pojos.ArticlesComments_Insert
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_Impl ..> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_Impl ..> com.gobeshonabd.persistence.DAO_Articles_Comment_I
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_Impl --|> com.gobeshonabd.services.Services_Articles_Comments_CRUD_I
+com.gobeshonabd.services.Services_Follow_Impl ..> java.lang.Override
+com.gobeshonabd.services.Services_Follow_Impl ..> com.gobeshonabd.configs.DateUtil
+com.gobeshonabd.services.Services_Follow_Impl ..> com.gobeshonabd.pojos.Follow
+com.gobeshonabd.services.Services_Follow_Impl ..> java.util.List
+com.gobeshonabd.services.Services_Follow_Impl ..> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.services.Services_Follow_Impl ..> com.gobeshonabd.persistence.DAO_Follow_I
+com.gobeshonabd.services.Services_Follow_Impl --|> com.gobeshonabd.services.Services_Follow_I
+com.gobeshonabd.services.Services_Messages_Impl ..> java.lang.Override
+com.gobeshonabd.services.Services_Messages_Impl ..> com.gobeshonabd.configs.DateUtil
+com.gobeshonabd.services.Services_Messages_Impl ..> com.gobeshonabd.pojos.Messages
+com.gobeshonabd.services.Services_Messages_Impl ..> java.util.List
+com.gobeshonabd.services.Services_Messages_Impl --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.services.Services_Messages_Impl ..> com.gobeshonabd.persistence.DAO_Messages_I
+com.gobeshonabd.services.Services_Messages_Impl --|> com.gobeshonabd.services.Services_Messages_I
+com.gobeshonabd.services.Services_QuestionAndAnswar_Impl ..> java.lang.Override
+com.gobeshonabd.services.Services_QuestionAndAnswar_Impl ..> com.gobeshonabd.configs.DateUtil
+com.gobeshonabd.services.Services_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswer
+com.gobeshonabd.services.Services_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+com.gobeshonabd.services.Services_QuestionAndAnswar_Impl ..> java.util.List
+com.gobeshonabd.services.Services_QuestionAndAnswar_Impl --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.services.Services_QuestionAndAnswar_Impl ..> com.gobeshonabd.persistence.DAO_QuestionAndAnswar_I
+com.gobeshonabd.services.Services_QuestionAndAnswar_Impl --|> com.gobeshonabd.services.Services_QuestionAndAnswar_I
+com.gobeshonabd.services.Services_QuestionAndAnswerComment_Impl ..> java.lang.Override
+com.gobeshonabd.services.Services_QuestionAndAnswerComment_Impl ..> com.gobeshonabd.configs.DateUtil
+com.gobeshonabd.services.Services_QuestionAndAnswerComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert
+com.gobeshonabd.services.Services_QuestionAndAnswerComment_Impl --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.services.Services_QuestionAndAnswerComment_Impl ..> com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_I
+com.gobeshonabd.services.Services_QuestionAndAnswerComment_Impl --|> com.gobeshonabd.services.Services_QuestionAndAnswerComment_I
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> java.lang.Override
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> com.gobeshonabd.configs.DateUtil
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> com.gobeshonabd.pojos.Users_Public_View
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> java.text.DateFormat
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> java.text.SimpleDateFormat
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> java.util.Date
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> java.util.List
+com.gobeshonabd.services.Services_Users_CRUD_Impl --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_I
+com.gobeshonabd.services.Services_Users_CRUD_Impl ..> com.gobeshonabd.persistence.DAO_Users_CRUD_I
+com.gobeshonabd.services.Services_Users_CRUD_Impl --|> com.gobeshonabd.services.Services_Users_CRUD_I
+com.gobeshonabd.voting.Controller_Voteing ..> org.springframework.web.bind.annotation.RequestBody
+com.gobeshonabd.voting.Controller_Voteing ..> org.springframework.web.bind.annotation.RequestMapping
+com.gobeshonabd.voting.Controller_Voteing ..> org.springframework.web.bind.annotation.RestController
+com.gobeshonabd.voting.Controller_Voteing ..> com.gobeshonabd.pojos.ArticlesCommentsVotes
+com.gobeshonabd.voting.Controller_Voteing ..> com.gobeshonabd.pojos.ArticlesVotes
+com.gobeshonabd.voting.Controller_Voteing ..> com.gobeshonabd.pojos.QuestionAndAnswerComment
+com.gobeshonabd.voting.Controller_Voteing ..> com.gobeshonabd.pojos.QuestionAndAnswerCommentVotes
+com.gobeshonabd.voting.Controller_Voteing ..> com.gobeshonabd.pojos.QuestionAndAnswerVotes
+com.gobeshonabd.voting.Controller_Voteing ..> org.springframework.web.bind.annotation.RequestMethod
+com.gobeshonabd.voting.Controller_Voteing --|> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> java.lang.Override
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> com.gobeshonabd.configs.HibernateUtil
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> java.util.List
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> org.hibernate.Criteria
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> org.hibernate.Session
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> org.hibernate.SessionFactory
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> org.hibernate.Transaction
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> org.hibernate.criterion.ProjectionList
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> org.hibernate.criterion.Projections
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> org.hibernate.criterion.Restrictions
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl ..> com.gobeshonabd.configs.SpringApplicationContextInterface
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl --|> com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_I
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl ..> java.lang.Override
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.ArticlesComments
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.ArticlesCommentsVotes
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.ArticlesComments_Insert
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.ArticlesVotes
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl ..> java.util.List
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl --|> com.gobeshonabd.voting.DAO_Vote_ArticleComment_I
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl --|> com.gobeshonabd.voting.Get_Bean_DAO_Generel_Vote_Save_Read_Impl
+com.gobeshonabd.voting.DAO_Vote_Article_Impl ..> java.lang.Override
+com.gobeshonabd.voting.DAO_Vote_Article_Impl ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.voting.DAO_Vote_Article_Impl ..> com.gobeshonabd.pojos.ArticlesVotes
+com.gobeshonabd.voting.DAO_Vote_Article_Impl ..> com.gobeshonabd.pojos.Articles_Insert
+com.gobeshonabd.voting.DAO_Vote_Article_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Vote_Article_Impl ..> java.util.List
+com.gobeshonabd.voting.DAO_Vote_Article_Impl --|> com.gobeshonabd.voting.DAO_Vote_Article_I
+com.gobeshonabd.voting.DAO_Vote_Article_Impl --|> com.gobeshonabd.voting.Get_Bean_DAO_Generel_Vote_Save_Read_Impl
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl ..> java.lang.Override
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.ArticlesVotes
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerComment
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerCommentVotes
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl ..> java.util.List
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl --|> com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_I
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl --|> com.gobeshonabd.voting.Get_Bean_DAO_Generel_Vote_Save_Read_Impl
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl ..> java.lang.Override
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.ArticlesVotes
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswer
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerVotes
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl ..> java.util.List
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl --|> com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_I
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl --|> com.gobeshonabd.voting.Get_Bean_DAO_Generel_Vote_Save_Read_Impl
+com.gobeshonabd.voting.Services_Vote_ArticleComment_Impl ..> java.lang.Override
+com.gobeshonabd.voting.Services_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.ArticlesCommentsVotes
+com.gobeshonabd.voting.Services_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.ArticlesComments_Insert
+com.gobeshonabd.voting.Services_Vote_ArticleComment_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.Services_Vote_ArticleComment_Impl --|> com.gobeshonabd.voting.Services_Vote_ArticleComment_I
+com.gobeshonabd.voting.Services_Vote_Article_Impl ..> java.lang.Override
+com.gobeshonabd.voting.Services_Vote_Article_Impl ..> com.gobeshonabd.pojos.ArticlesVotes
+com.gobeshonabd.voting.Services_Vote_Article_Impl ..> com.gobeshonabd.pojos.Articles_Insert
+com.gobeshonabd.voting.Services_Vote_Article_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.Services_Vote_Article_Impl --|> com.gobeshonabd.voting.Services_Vote_Article_I
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_Impl ..> java.lang.Override
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerComment
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerCommentVotes
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerVotes
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_Impl --|> com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_I
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_Impl ..> java.lang.Override
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.ArticlesCommentsVotes
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswerVotes
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_Impl ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_Impl --|> com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_I
+com.gobeshonabd.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl ..> com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_I
+com.gobeshonabd.configs.SpringApplicationContextInterface ..> org.springframework.context.ApplicationContext
+com.gobeshonabd.configs.SpringApplicationContextInterface ..> org.springframework.context.support.ClassPathXmlApplicationContext
+com.gobeshonabd.persistence.DAO_Articles_Comment_I ..> com.gobeshonabd.pojos.ArticlesComments
+com.gobeshonabd.persistence.DAO_Articles_Comment_I ..> com.gobeshonabd.pojos.ArticlesComments_Insert
+com.gobeshonabd.persistence.DAO_Articles_I ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.persistence.DAO_Articles_I ..> com.gobeshonabd.pojos.Articles_Concise_View
+com.gobeshonabd.persistence.DAO_Articles_I ..> com.gobeshonabd.pojos.Articles_Insert
+com.gobeshonabd.persistence.DAO_Articles_I ..> java.util.List
+com.gobeshonabd.persistence.DAO_Follow_I ..> com.gobeshonabd.pojos.Follow
+com.gobeshonabd.persistence.DAO_Follow_I ..> java.util.List
+com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_I ..> java.util.List
+com.gobeshonabd.persistence.DAO_Messages_I ..> com.gobeshonabd.pojos.Messages
+com.gobeshonabd.persistence.DAO_Messages_I ..> java.util.List
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswer
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswer_View_Summury
+com.gobeshonabd.persistence.DAO_QuestionAndAnswar_I ..> java.util.List
+com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_I ..> com.gobeshonabd.pojos.QuestionAndAnswerComment
+com.gobeshonabd.persistence.DAO_QuestionAndAnswerComment_I ..> com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert
+com.gobeshonabd.persistence.DAO_Users_CRUD_I ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.persistence.DAO_Users_CRUD_I ..> com.gobeshonabd.pojos.Users_Public_View
+com.gobeshonabd.persistence.DAO_Users_CRUD_I ..> java.util.List
+com.gobeshonabd.search.DAO_Search_Users_I ..> java.util.List
+com.gobeshonabd.services.Services_Articles_CRUD_I ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.services.Services_Articles_CRUD_I ..> com.gobeshonabd.pojos.Articles_Concise_View
+com.gobeshonabd.services.Services_Articles_CRUD_I ..> com.gobeshonabd.pojos.Articles_Insert
+com.gobeshonabd.services.Services_Articles_CRUD_I ..> java.util.List
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_I ..> com.gobeshonabd.pojos.ArticlesComments
+com.gobeshonabd.services.Services_Articles_Comments_CRUD_I ..> com.gobeshonabd.pojos.ArticlesComments_Insert
+com.gobeshonabd.services.Services_Follow_I ..> com.gobeshonabd.pojos.Follow
+com.gobeshonabd.services.Services_Follow_I ..> java.util.List
+com.gobeshonabd.services.Services_Messages_I ..> com.gobeshonabd.pojos.Messages
+com.gobeshonabd.services.Services_Messages_I ..> java.util.List
+com.gobeshonabd.services.Services_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswer
+com.gobeshonabd.services.Services_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+com.gobeshonabd.services.Services_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswer_View_Summury
+com.gobeshonabd.services.Services_QuestionAndAnswar_I ..> java.util.List
+com.gobeshonabd.services.Services_QuestionAndAnswerComment_I ..> com.gobeshonabd.pojos.QuestionAndAnswerComment
+com.gobeshonabd.services.Services_QuestionAndAnswerComment_I ..> com.gobeshonabd.pojos.QuestionAndAnswerComment_Insert
+com.gobeshonabd.services.Services_Users_CRUD_I ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.services.Services_Users_CRUD_I ..> com.gobeshonabd.pojos.Users_Public_View
+com.gobeshonabd.services.Services_Users_CRUD_I ..> java.util.List
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_I ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_I ..> java.util.List
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_I ..> com.gobeshonabd.pojos.ArticlesCommentsVotes
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_I ..> com.gobeshonabd.pojos.ArticlesComments_Insert
+com.gobeshonabd.voting.DAO_Vote_ArticleComment_I ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Vote_Article_I ..> com.gobeshonabd.pojos.Articles
+com.gobeshonabd.voting.DAO_Vote_Article_I ..> com.gobeshonabd.pojos.ArticlesVotes
+com.gobeshonabd.voting.DAO_Vote_Article_I ..> com.gobeshonabd.pojos.Articles_Insert
+com.gobeshonabd.voting.DAO_Vote_Article_I ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Vote_Article_I ..> java.util.List
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_I ..> com.gobeshonabd.pojos.QuestionAndAnswerComment
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_I ..> com.gobeshonabd.pojos.QuestionAndAnswerCommentVotes
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_I ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswerVotes
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswer_Insert
+com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.Users
+com.gobeshonabd.voting.Get_Bean_DAO_Generel_Vote_Save_Read_Impl ..> com.gobeshonabd.configs.SpringContextSingletron
+com.gobeshonabd.voting.Get_Bean_DAO_Generel_Vote_Save_Read_Impl ..> com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_I
+com.gobeshonabd.voting.Services_Vote_ArticleComment_I ..> com.gobeshonabd.pojos.ArticlesCommentsVotes
+com.gobeshonabd.voting.Services_Vote_Article_I ..> com.gobeshonabd.pojos.ArticlesVotes
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_I ..> com.gobeshonabd.pojos.QuestionAndAnswerCommentVotes
+com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_I ..> com.gobeshonabd.pojos.QuestionAndAnswerVotes
+@enduml

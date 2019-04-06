@@ -1,0 +1,62 @@
+<div ng-controller="userController" ng-init="user_init()">
+    <br><br>
+    <!--start : search among users-->
+    <form ng-submit="">
+        <div class="row">
+            <div class="col-sm-2 col-sm-offset-4">
+                <p class="pull-right" style="font-size: 15px; font-weight: bold; padding-top: 5px">
+                    Search by 
+                </p>
+            </div>
+            <div class="col-sm-2">
+                <select style="font-size: 15px; font-weight: bold; margin-top: 5px; width:100%" id="user_search_type">
+                    <option value="name" selected>Name</option>
+                    <option value="joinDate">Join Date</option>
+                    <option value="skills">Skills</option>
+                    <!-- <option value="articleContent">Content</option> -->
+                </select>
+            </div>
+            <div class="col-sm-4">
+                <div class="form-group">
+                    <input type="text" class="form-control" required="required" ng-model="user.searchbox" ng-change="search()">
+                </div>
+            </div>
+        </div>
+    </form>
+    <!-- End : search among users-->
+    <br>
+    <div class="box box-primary">
+        <div class="box-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Name</th>
+                        <th>Join Date</th>
+                        <th>Skills</th>
+                        <th>Communication Interest</th>
+                        <th>Total Articles</th>
+                        <th>Total Questions</th>
+                        <th>Total Up Votes</th>
+                        <th>Total Down Votes</th>
+                        <th>Interested Fields</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in users" ng-if="x.userID != guser_logged_id">
+                        <td>{{$index + 1}}</td>
+                        <td><a href="#!single/user/view/{{ x.userID }}">{{ x.userFirstName}} {{ x.userLastName}}</a></td>
+                        <td>{{ x.joinDate}}</td>
+                        <td>{{ x.skills}}</td>
+                        <td>{{ x.communicationInterest}}</td>
+                        <td>{{ x.totalArticles}}</td>
+                        <td>{{ x.totalQuestions}}</td>
+                        <td>{{ x.totalUpVote}}</td>
+                        <td>{{ x.totalDownVote}}</td>
+                        <td>{{ x.interestedFields}}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

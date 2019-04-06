@@ -1,0 +1,42 @@
+<div ng-controller="qaController" class="row" ng-init="view_qa_single()">
+    <br><br>
+    <div class="col-sm-8 col-sm-offset-2">
+        <div class="box box-primary">
+            <div class="box-header with-border">
+                <h5>{{ qa.question}}</h5>
+                <h5>{{ qa.questionDate}}</h5>
+            </div>
+            <div class="box-body">
+                <p>
+                    {{ qa.questionDescription }}
+                </p>
+                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Vote Up</button>
+                <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-down"></i> Vote Down</button>
+                <span class="pull-right text-muted">{{ qa.quesionUpVote}} UpVote - {{ qa.quesionDownVote}} Down Vote</span>
+            </div>
+            <div class="box-footer">
+                <form ng-submit="qa_comment_new()">
+                    <div class="img-push">
+                        <input class="form-control input-sm" placeholder="Press enter to post comment" type="text" ng-model="comment.qa">
+                    </div>
+                </form>
+            </div>
+            <div class="box-footer box-comments">
+                <div class="box-comment" ng-repeat="v in qa.questionComments
+">
+                    <div class="comment-text" style="margin-left: 0px">
+                        <span class="username">
+                            {{ v.userFirstName }} {{ v.userLastName }}
+                            <span class="text-muted pull-right">{{ v.questionCommentDate }}</span>
+                        </span>
+                        {{ v.questionCommentContent }}
+                        <br>
+                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-up"></i> Vote Up</button>
+                        <button type="button" class="btn btn-default btn-xs"><i class="fa fa-thumbs-o-down"></i> Vote Down</button>
+                        <span class="pull-right text-muted">{{ v.questionCommentUpVote }} UpVote - {{ v.questionCommentDownVote }} Down Vote</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

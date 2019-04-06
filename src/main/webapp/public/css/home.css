@@ -1,0 +1,24 @@
+.navbar-nav>li>.login-btn-nav{
+	padding: 4px 40px;
+    background: transparent;
+    border: 1px solid #ccc;
+    margin: 8% 0px;
+}
+
+.login-box, .register-box {
+    width: 360px;
+    margin: 0% auto;
+}
+
+.login-logo, .register-logo {
+    max-height: 220px;
+    max-width: 220px;
+}
+
+.create-article-btn, .create-question-btn {
+	margin-bottom: 5px;
+}
+
+.create-article-btn i, .create-question-btn i {
+	padding-top: 2px;
+}

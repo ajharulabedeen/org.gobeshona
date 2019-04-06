@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.gobeshonabd.pojos.ArticlesVotes" table="articles_votes">
+    <!--**************** Start Filed Mapping *****************-->
+    <!--1. private int articleID-->
+    <id name="articles_voteID" column="articles_vote_id" >
+      <generator class="increment"/>
+    </id>
+    <!--    2 private int vote_userID -->
+    <!--id that voted--> 
+    <property name="vote_userID" column="vote_user_id"/>
+    
+    <!--    3 private int vote_articleID -->
+    <property name="vote_articleID" column="vote_article_id"/>
+    
+    <!--    4 private String voteDate -->
+    <property name="voteDate" column="vote_date"/>
+    
+    <!--    5 private int voteValue -->
+    <property name="voteValue" column="vote_value"/>
+    <!--**************** End Filed Mapping *****************-->
+  </class>
+</hibernate-mapping>

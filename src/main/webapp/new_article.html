@@ -1,0 +1,32 @@
+<section class="content" ng-controller="articleController" ng-init="article_init()">
+    <div class="row">
+        <div class="col-sm-8 col-sm-offset-2">
+            <div class="box box-primary">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Article</h3>
+                </div>
+                <div class="box-body">
+                    <form ng-submit="article_new()">
+
+                        <div class="form-group">
+                            <label for="">Article</label>
+                            <input type="text" class="form-control" ng-model="articleSubject">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Content</label>
+                            <textarea class="form-control" ng-model="articleContent"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Type</label>
+                            <input type="text" class="form-control" ng-model="articleType">
+                        </div>
+
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

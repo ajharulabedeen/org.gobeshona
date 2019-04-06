@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.gobeshonabd.pojos.MessageException" table="message_exception">
+    <!--1. private int message_exception_id; -->
+    <id name="message_exception_id" column="message_exception_id" >
+      <generator class="increment"/>
+    </id>
+
+    <!--2.  private int user_who_will_make_exception; -->
+    <property name="user_who_will_make_exception" column="user_who_will_make_exception" />
+
+    <!--3.  private int user_who_will_be_made_exception;-->
+    <property name="user_who_will_be_made_exception" column="user_who_will_be_made_exception" />
+
+    <!--4.  private String date_making_exception; -->
+    <property name="date_making_exception" column="date_making_exception" />
+
+  </class>
+</hibernate-mapping>

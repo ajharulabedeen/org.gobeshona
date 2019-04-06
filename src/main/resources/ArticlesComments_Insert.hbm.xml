@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping> 
+    <class name="com.gobeshonabd.pojos.ArticlesComments_Insert" table="articles_comments">  
+        <!--1.     private int commentId-->        
+        <id name="commentId" column="comment_id">
+            <generator class="increment"></generator> 
+        </id>
+        
+        <!--2.  private int userID -->
+        <property name="userID" column="user_id"/>
+        
+        <!--3. private String commentDate-->
+        <property name="commentDate" column="comment_date" />
+        
+        <!--4. private int commentUpVote-->
+        <property name="commentUpVote" column="comment_up_vote"/>
+        
+        <!--5. private int commentDownVote-->
+        <property name="commentDownVote" column="comment_down_vote"/>
+        
+        <!--6. private String commentContent-->
+        <property name="commentContent" column="comment_content" length="2000" />
+        
+        <!--7. private String commentContent-->
+        <property name="articleID_Comment" column="article_id_comment"/>
+    </class> 
+</hibernate-mapping>

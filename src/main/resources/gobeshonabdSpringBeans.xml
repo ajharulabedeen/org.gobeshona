@@ -1,0 +1,169 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:flow="http://www.springframework.org/schema/webflow-config"
+       xmlns:jee="http://www.springframework.org/schema/jee"
+       xmlns:jms="http://www.springframework.org/schema/jms"
+       xmlns:lang="http://www.springframework.org/schema/lang"
+       xmlns:osgi="http://www.springframework.org/schema/osgi"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:util="http://www.springframework.org/schema/util"
+
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.0.xsd
+          http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.0.xsd
+          http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.0.xsd
+          http://www.springframework.org/schema/webflow-config http://www.springframework.org/schema/webflow-config/spring-webflow-config-2.0.xsd
+          http://www.springframework.org/schema/jee http://www.springframework.org/schema/jee/spring-jee-4.0.xsd
+          http://www.springframework.org/schema/jms http://www.springframework.org/schema/jms/spring-jms-4.0.xsd
+          http://www.springframework.org/schema/lang http://www.springframework.org/schema/lang/spring-lang-4.0.xsd
+          http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi-1.2.xsd
+          http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.0.xsd
+          http://www.springframework.org/schema/util http://www.springframework.org/schema/util/spring-util-4.0.xsd
+">
+    
+<!--*********** Start POJO Beans ****************-->
+    <bean id="pojoArticles"             class="com.gobeshonabd.pojos.Articles"/>
+    <bean id="pojoArticlesComments"     class="com.gobeshonabd.pojos.ArticlesComments"/>
+    <bean id="pojoFollow"               class="com.gobeshonabd.pojos.Follow"/>
+    <bean id="pojoMessages"             class="com.gobeshonabd.pojos.Messages"/>
+    <bean id="pojoQuestionAndAnswer"    class="com.gobeshonabd.pojos.QuestionAndAnswer"/>
+    <bean id="pojoQuestionAndAnswerComment" class="com.gobeshonabd.pojos.QuestionAndAnswerComment"/>
+    <bean id="pojoUsers"                class="com.gobeshonabd.pojos.Users"/>
+    <bean id="pojoMessageBlock"         class="com.gobeshonabd.pojos.MessageBlock"/>
+    <bean id="pojoMessageException"     class="com.gobeshonabd.pojos.MessageException"/>
+    <bean id="pojoUsers_Public_View"     class="com.gobeshonabd.pojos.Users_Public_View"/>
+<!--*********** End POJO Beans ****************-->
+    
+    
+    
+    <bean  id="id_DAO_Generel_Insert_Update_Delete_SelectAll_Impl"
+           class="com.gobeshonabd.persistence.DAO_Generel_Insert_Update_Delete_SelectAll_Impl">
+    </bean> 
+    <bean  id="id_UserPublicView"
+           class="com.gobeshonabd.persistence.UserPublicView">
+    </bean> 
+    
+<!--    <bean id="id_Services_User_PasswordEncryption_Impl" class="com.gobeshonabd.security.Services_User_PasswordEncryption_Impl_BCryptPasswordEncoder">
+        </bean>-->
+    
+<!-- ****************** Start.  "user" beans *********************************  -->
+    <bean id="id_DAO_Users_CRUD_Impl" class="com.gobeshonabd.users.DAO_Users_CRUD_Impl" >
+    </bean>
+    <bean id="id_Services_Users_CRUD_Impl" class="com.gobeshonabd.users.Services_Users_CRUD_Impl">
+        <property name="dao_users_CRUD_I" ref="id_DAO_Users_CRUD_Impl"/>
+        <property name="selectAll_I" ref="id_DAO_Generel_Insert_Update_Delete_SelectAll_Impl"/>
+        <!--<property name="services_User_PasswordEncryption_I" ref="id_Services_User_PasswordEncryption_Impl"/>-->
+    </bean>  
+<!-- ****************** End "user" beans *********************************  -->
+    
+    
+<!--***************** Start. Articles Beans *******************-->
+    <bean id="id_DAO_Articles_Impl" class="com.gobeshonabd.articles.DAO_Articles_Impl"/>
+    <bean id="id_Services_Articles_CRUD_Impl" class="com.gobeshonabd.articles.Services_Articles_CRUD_Impl">
+        <property name="dao_Articles_I" ref="id_DAO_Articles_Impl"/>
+    </bean>
+<!--***************** End. Articles Beans *******************-->
+
+
+<!--***************** Start. Artcle Comments Beans *******************-->    
+    <bean id="id_DAO_Articles_Comment_Impl" class="com.gobeshonabd.articles.DAO_Articles_Comment_Impl"/>
+    <bean id="id_Services_Articles_Comments_CRUD_Impl" class="com.gobeshonabd.articles.Services_Articles_Comments_CRUD_Impl" >
+        <property name="dao_Articles_Comment_I" ref="id_DAO_Articles_Comment_Impl"></property>
+    </bean>
+<!--***************** End. Artcle Comments Beans *******************-->    
+
+
+<!--***************** Start. Question and Answar Beans *******************-->    
+    <bean id="id_DAO_QuestionAndAnswar_Impl" class="com.gobeshonabd.questionandanswer.DAO_QuestionAndAnswar_Impl"/>
+    <bean id="id_Services_QuestionAndAnswar_Impl" class="com.gobeshonabd.questionandanswer.Services_QuestionAndAnswar_Impl" >
+        <property name="dao_questionAndAnswar_I" ref="id_DAO_QuestionAndAnswar_Impl"></property>
+    </bean>
+<!--***************** End. Question and Answar  Beans *******************-->    
+
+    
+<!--***************** Start. Question and Answar Comments Beans *******************-->    
+    <bean id="id_DAO_QuestionAndAnswerComment_Impl" class="com.gobeshonabd.questionandanswer.DAO_QuestionAndAnswerComment_Impl"/>
+    <bean id="id_Services_QuestionAndAnswerComment_Impl" class="com.gobeshonabd.questionandanswer.Services_QuestionAndAnswerComment_Impl" >
+        <property name="dao_QuestionAndAnswerComment_I" ref="id_DAO_QuestionAndAnswerComment_Impl"></property>
+    </bean>
+<!--***************** End. Question and Answar Comments Beans *******************-->    
+
+<!--***************** Start. Message Beans *******************-->    
+    <bean id="id_DAO_Messages_Impl" class="com.gobeshonabd.messages.DAO_Messages_Impl"/>
+    <bean id="id_Services_Messages_Impl" class="com.gobeshonabd.messages.Services_Messages_Impl" >
+        <property name="dao_Messages_I" ref="id_DAO_Messages_Impl"></property>
+    </bean>
+    
+    <!-- Message Blocking-->
+    <bean id="id_DAO_Message_Exception_Impl" class="com.gobeshonabd.messages.DAO_Message_Exception_Impl"/>
+    <bean id="id_Services_Message_Exception_Impl" class="com.gobeshonabd.messages.Services_Message_Exception_Impl" >
+        <property name="bean_dao_Message_Exception_I" ref="id_DAO_Message_Exception_Impl"></property>
+    </bean>
+    
+    <!-- Message Exception -->
+    <bean id="id_DAO_MessageBlocking_Impl" class="com.gobeshonabd.messages.DAO_MessageBlocking_Impl"/>
+    <bean id="id_Services_MessageBlocking_Impl" class="com.gobeshonabd.messages.Services_MessageBlocking_Impl" >
+        <property name="bean_dao_MessageBlocking_I" ref="id_DAO_MessageBlocking_Impl"></property>
+    </bean>
+<!--***************** End. Message Beans *******************-->    
+
+<!--***************** Start. Follow Beans *******************-->    
+    <bean id="id_DAO_Follow_Impl" class="com.gobeshonabd.follow.DAO_Follow_Impl"/>
+    <bean id="id_Services_Follow_Impl" class="com.gobeshonabd.follow.Services_Follow_Impl" >
+        <property name="dao_Follow_I" ref="id_DAO_Follow_Impl"></property>
+    </bean>
+<!--***************** End. Follow Beans *******************-->    
+
+
+<!--***************** Start. Vote Beans *******************-->    
+    <bean  id="id_DAO_Generel_Vote_Save_Read_I"
+           class="com.gobeshonabd.voting.DAO_Generel_Vote_Save_Read_Impl">
+    </bean> 
+    
+    <!-- Article --> 
+    <bean id="id_DAO_Vote_Article_Impl" class="com.gobeshonabd.voting.DAO_Vote_Article_Impl"/>
+    <bean id="id_Services_Vote_Article_Impl" class="com.gobeshonabd.voting.Services_Vote_Article_Impl" >
+        <property name="bean_DAO_Vote_Article_I" ref="id_DAO_Vote_Article_Impl"></property>
+    </bean>    
+    
+    <!-- Article Comment --> 
+    <bean id="id_DAO_Vote_ArticleComment_Impl" class="com.gobeshonabd.voting.DAO_Vote_ArticleComment_Impl"/>
+    <bean id="id_Services_Vote_ArticleComment_Impl" class="com.gobeshonabd.voting.Services_Vote_ArticleComment_Impl" >
+        <property name="bean_DAO_Vote_ArticleComment_I" ref="id_DAO_Vote_ArticleComment_Impl"></property>
+    </bean>
+    
+    <!-- QuestionAndAnswer --> 
+    <bean id="id_DAO_Vote_QuestionAndAnswar_Impl" class="com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswar_Impl"/>
+    <bean id="id_Service_Vote_QuestionAndAnswar_Impl" class="com.gobeshonabd.voting.Services_Vote_QuestionAndAnswar_Impl" >    
+        <property name="bean_DAO_Vote_QuestionAndAnswar_I" ref="id_DAO_Vote_QuestionAndAnswar_Impl"></property>
+    </bean>    
+    
+    <!-- QuestionAndAnswer Comment --> 
+    <bean id="id_DAO_Vote_QuestionAndAnswarComment_Impl" class="com.gobeshonabd.voting.DAO_Vote_QuestionAndAnswarComment_Impl"/>
+    <bean id="id_Service_Vote_QuestionAndAnswarComment_Impl" class="com.gobeshonabd.voting.Services_Vote_QuestionAndAnswarComment_Impl" >    
+        <property name="bean_DAO_Vote_QuestionAndAnswarComment_I" ref="id_DAO_Vote_QuestionAndAnswarComment_Impl"></property>
+    </bean>
+<!--***************** End. Vote Beans *******************-->    
+
+<!--***************** Start > search > Beans *******************--> 
+    <bean id="id_DAO_Search_Users_Impl" class="com.gobeshonabd.search.DAO_Search_Users_Impl"/>
+    <bean id="id_Service_Search_Users_Impl" class="com.gobeshonabd.search.Service_Search_Users_Impl" >    
+        <property name="bean_dao_Search_Users_I" ref="id_DAO_Search_Users_Impl"></property>
+    </bean>
+    
+    <bean id="id_DAO_Search_Article_Impl" class="com.gobeshonabd.search.DAO_Search_Article_Impl"/>
+    <bean id="id_Services_Search_Article_Impl" class="com.gobeshonabd.search.Services_Search_Article_Impl" >    
+        <property name="bean_dao_Search_Article_I" ref="id_DAO_Search_Article_Impl"></property>
+    </bean>
+    
+    <bean id="id_DAO_Search_QuestionAndAnswar_Impl" class="com.gobeshonabd.search.DAO_Search_QuestionAndAnswar_Impl"/>
+    <bean id="id_Services_Search_QuestionAndAnswar_Impl" class="com.gobeshonabd.search.Services_Search_QuestionAndAnswar_Impl" >    
+        <property name="bean_dao_Search_QuestionAndAnswar_I" ref="id_DAO_Search_QuestionAndAnswar_Impl"></property>
+    </bean>
+<!--***************** End > search > Beans *******************-->    
+
+</beans>

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping> 
+    
+<!-- ******************* Start DB Fields Mapping *************************-->      
+    <class name="com.gobeshonabd.pojos.Users" table="users" lazy="true">  
+        
+        <!--1.     private int userID; -->        
+        <id name="userID" column="user_id">
+            <generator class="increment"></generator> 
+        </id>
+        
+        <!--2.     private String emailID; -->
+        <property name="emailID" column="user_name" length="200"/>
+        
+        <!--3. private String Password;-->
+        <property name="Password" column="password" length="500"/>
+        
+        <!--4. private String userFirstName; -->
+        <property name="userFirstName" column="user_first_name" length="500"/>
+        
+        <!--5. private String userLastName;-->
+        <property name="userLastName" column="user_last_name" length="500"/>
+        
+        <!--6. private String DateOfBarth;-->
+        <property name="DateOfBarth" column="date_of_birth" />
+        
+        <!--7. private String Address;-->
+        <property name="Address" column="address" length="5000"/>
+        
+        <!--8. private String Gender;-->
+        <property name="Gender" column="gender" length="100"/>
+        
+        <!--9. private String EducationalQualification;-->
+        <property name="EducationalQualification" column="educational_qualification" length="500"/>
+        
+        <!--10. private String InterestedFields;-->
+        <property name="InterestedFields" column="interested_fields" length="1000"/>
+        
+        <!--11. private String CurrentlyWorking;-->
+        <property name="CurrentlyWorking" column="currently_working" length="1000"/>
+        
+        <!--12. private String Occupation;-->
+        <property name="Occupation" column="occupation" length="200"/>
+        
+        <!--13. private String contactInfo;-->
+        <property name="contactInfo" column="contact_info" length="200"/>
+        
+        <!--14. private String joinDate;-->
+        <property name="joinDate" column="join_date" />
+        
+        <!--15. private String ReligiousView;-->
+        <property name="ReligiousView" column="religious_view" length="100"/>
+        
+        <!--16. private String Nationality;-->
+        <property name="Nationality" column="nationality" length="100"/>
+        
+        <!--17. private String expriences;-->
+        <property name="expriences" column="expriences" length="10000"/>
+         <!--18. -->
+        <property name="skills" column="skills"/>
+        <!--19. -->
+        <property name="enable" column="enabled" update="false"/>
+        
+        
+<!--    >>>>>>>>>>>>>>>>> start New Fild Added 25-5-17 >>>>>>>>>>>>>>>>>--> 
+        <!--    20. 1. private int communicationInterest = 0;-->
+        <property name="communicationInterest" column="communication_interest" />
+        
+        <!--    21. 2. private int totalArticles    = 0;-->
+        <property name="totalArticles" column="total_articles" />
+        
+        <!--    22. 3. private int totalQuestions   = 0;-->
+        <property name="totalQuestions" column="total_questions"/>
+        
+        <!--    23. 4. private int totalAnswered    = 0;-->
+        <property name="totalAnswered" column="total_answered" />
+        
+        <!--    24. 5. private int totalPosts       = 0;-->
+        <property name="totalPosts" column="total_posts"/>
+        
+        <!--    25. 6. private int totalUpVote      = 0;-->
+        <property name="totalUpVote" column="total_up_vote"/>
+        
+        <!--    26. 7. private int totalDownVote    = 0;-->
+        <property name="totalDownVote" column="total_down_vote"/>
+        
+        <!--    27. 8. private float totalVote = 0;-->
+        <property name="totalVote" column="total_vote"/>
+        
+        <!--    27. 8. private double profileWeight = 0;-->
+        <property name="profileWeight" column="profile_weight"/>
+<!--//    >>>>>>>>>>>>>>>>> end New Fild Added 25-5-17 >>>>>>>>>>>>>>>>>--> 
+
+<!-- ******************* End DB Fields Mapping *************************-->      
+
+
+
+
+<!-- ******************* Start DB Relations  Mapping With users*************************-->      
+        <!--Map to QuestionandAnswer Table.-->
+<!--        <set name="questionsAskedByUser" cascade="all" >
+            <key column="userID_questionsAskedByUser" />
+            <one-to-many class="com.gobeshonabd.pojos.QuestionAndAnswer" />
+        </set>-->
+        
+        <!--Map to Article Table.-->
+        <!--<set name="articleByUser" cascade="all" lazy="false" >-->
+<!--        <set name="articleByUser" cascade="all"  >
+            <key column="userID_articleByUser" />
+            <one-to-many class="com.gobeshonabd.pojos.Articles" />
+        </set>-->
+        
+<!--        Map to Article Table.
+        <set name="messages" cascade="all" >
+            <key column="userID_messages" />
+            <one-to-many class="com.gobeshonabd.pojos.Messages" />
+        </set>-->
+<!-- ******************* End DB Relations  Mapping With users***************************-->      
+
+    </class> 
+</hibernate-mapping>
+    
+    
+    
+    
+    
+    

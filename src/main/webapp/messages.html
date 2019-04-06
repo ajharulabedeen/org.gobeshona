@@ -1,0 +1,278 @@
+<section class="content" ng-controller="messagesController" ng-init="initialize_messages()">
+    <div class="row">
+        <div class="col-md-3">
+            <button href="compose.html" class="btn btn-primary btn-block margin-bottom" ng-click="composer_modal()">
+                Compose
+            </button>
+
+            <div class="box box-solid">
+                <div class="box-header with-border">
+                    <h3 class="box-title">Folders</h3>
+
+                    <div class="box-tools">
+                        <button type="button" class="btn btn-box-tool" data-widget="collapse"><i
+                                class="fa fa-minus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="box-body no-padding">
+                    <ul class="nav nav-pills nav-stacked">
+                        <li ng-class="{active: currentFolder == 'unread'}"><a href="javascript:undefined"
+                                                                              ng-click="changeFolder('unread')"><i
+                                class="fa fa-inbox"></i> UnRead</a></li>
+                        <li ng-class="{active: currentFolder == 'read'}"><a href="javascript:undefined"
+                                                                            ng-click="changeFolder('read')"><i
+                                class="fa fa-inbox"></i> Read</a></li>
+                        <li ng-class="{active: currentFolder == 'sent'}"><a href="javascript:undefined"
+                                                                            ng-click="changeFolder('sent')"><i
+                                class="fa fa-envelope-o"></i> Sent</a></li>
+                        <li ng-class="{active: currentFolder == 'message_manager'}"><a href="javascript:undefined"
+                                                                                       ng-click="changeFolder('message_manager')"><i
+                                class="fa fa-cog"></i>Message Manager</a></li>
+                        <li ng-class="{active: currentFolder == 'blocked'}"><a href="javascript:undefined"
+                                                                               ng-click="changeFolder('blocked')"><i
+                                class="fa fa-user"></i> Blocked List</a></li>
+                        <li ng-class="{active: currentFolder == 'exception'}"><a href="javascript:undefined"
+                                                                                 ng-click="changeFolder('exception')"><i
+                                class="fa fa-user"></i>Exception List</a></li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- /.col -->
+        <div class="col-md-9">
+            <div class="box box-primary">
+                <div style="background-color: pink" class="box-header with-border">
+                    <h3 class="box-title" ng-show="currentFolder == 'read'"><b>Read</b></h3>
+                    <h3 class="box-title" ng-show="currentFolder == 'unread'"><b>Un Read</b></h3>
+                    <h3 class="box-title" ng-show="currentFolder == 'sent'"><b>Sent</b></h3>
+                    <h3 class="box-title" ng-show="currentFolder == 'blocked'"><b>Blocked List</b></h3>
+                    <h3 class="box-title" ng-show="currentFolder == 'exception'"><b>Exception List</b></h3>
+                    <h3 class="box-title" ng-show="currentFolder == 'message_manager'"><b>Message Manager</b></h3>
+
+                    <!--Search in mail not needed now-->
+                    <!--                    <div class="box-tools pull-right">
+                                            <div class="has-feedback">
+                                                <input type="text" class="form-control input-sm" placeholder="Search Mail">
+                                                <span class="glyphicon glyphicon-search form-control-feedback"></span>
+                                            </div>
+                                        </div> -->
+                    <!--Search in mail not needed now-->
+                    <!-- /.box-tools -->
+                </div>
+                <!-- /.box-header Start : Showing Message Table-->
+                <div class="box-body no-padding">
+                    <div class="table-responsive mailbox-messages">
+
+                        <table class="table table-hover table-striped"
+                               ng-show="currentFolder != 'exception' && currentFolder != 'blocked' && currentFolder != 'message_manager'">
+                            <thead>
+                            <tr>
+                                <th style="background-color: #8E44AD">#</th>
+                                <th style="background-color: orange">Name</th>
+                                <th style="background-color: #ADD7F0">Subject</th>
+                                <th style="background-color: #1ab7ea">Messages</th>
+                                <th style="background-color: #C70039  ">Time</th>
+                                <th style="background-color: #27AE60">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in messages">
+                                <td> {{$index + 1}}</td>
+                                <td class="mailbox-name">{{ x.userFirstName}} {{ x.userLastName}}</td>
+                                <td class="mailbox-subject"><b>{{ x.subject}}</b></td>
+                                <td>{{ x.message | limitTo: 20 }}{{x.message.length > 20 ? '...' : ''}}</td>
+                                <td class="mailbox-date">{{ x.messageDate}}</td>
+                                <td>
+                                    <!-- <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button> -->
+                                    <button type="button" class="btn btn-success btn-xs"
+                                            ng-click="show_message($index, x.messageID, currentFolder)"
+                                            title="View Message"><i
+                                            class="fa fa-eye"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+
+                        <!--    Start : Block List table-->
+                        <table class="table table-hover table-striped" ng-show="currentFolder == 'blocked'">
+                            <thead>
+                            <tr>
+                                <th style="background-color: #8E44AD">#</th>
+                                <th style="background-color: orange">Name</th>
+                                <th style="background-color: #ADD7F0">Block Date And Time</th>
+                                <th style="background-color: #27AE60">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in block_users">
+                                <td> {{$index + 1}}</td>
+                                <td class="mailbox-name">{{ x.userFirstName}} {{ x.userLastName}}</td>
+                                <td class="mailbox-date">{{ x.date_of_block}}</td>
+                                <td>
+                                    <!-- <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button> -->
+                                    <button type="button" class="btn btn-success btn-xs"
+                                            ng-click="unBlockUser(x.userID, $index)"><i
+                                            class="fa fa-unlock-alt" title="Remove from block list"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--    End : Block List table-->
+
+                        <!--Start : exception list table-->
+                        <table class="table table-hover table-striped" ng-show="currentFolder == 'exception'">
+                            <thead>
+                            <tr>
+                                <th style="background-color: #8E44AD">#</th>
+                                <th style="background-color: orange">Name</th>
+                                <th style="background-color: #ADD7F0">Exception Date And Time</th>
+                                <th style="background-color: #ADD7F0">Skills</th>
+                                <th style="background-color: #ADD7F0">Interested</th>
+                                <th style="background-color: #ADD7F0">Up Vote</th>
+                                <th style="background-color: #ADD7F0">Down Vote</th>
+                                <th style="background-color: #ADD7F0">Join Date</th>
+                                <th style="background-color: #27AE60">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in exception_users">
+                                <td> {{$index + 1}}</td>
+                                <td class="mailbox-name">{{ x.userFirstName}} {{ x.userLastName}}</td>
+                                <td class="mailbox-date">{{ x.date_making_exception}}</td>
+                                <td class="mailbox-date">{{ x.skills}}</td>
+                                <td class="mailbox-date">{{ x.InterestedFields}}</td>
+                                <td class="mailbox-date">{{ x.totalUpVote}}</td>
+                                <td class="mailbox-date">{{ x.totalDownVote}}</td>
+                                <td class="mailbox-date">{{ x.joinDate}}</td>
+                                <td>
+                                    <!-- <button type="button" class="btn btn-danger btn-xs"><i class="fa fa-trash"></i></button> -->
+                                    <button type="button" class="btn btn-danger btn-xs"
+                                            ng-click="unExceptionUser(x.userID, $index)"
+                                            title="Remove from exception list"><i
+                                            class="fa fa-handshake-o"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                        <!--End : exception list table-->
+
+
+                        <table class="table table-hover table-striped" ng-show="currentFolder == 'message_manager'">
+                            <thead>
+                            <tr>
+                                <th style="background-color: #8E44AD">#</th>
+                                <th style="background-color: orange">Name</th>
+                                <th style="background-color: #27AE60">Action</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr ng-repeat="x in message_users">
+                                <td> {{$index + 1}}</td>
+                                <td class="mailbox-name">{{ x.userFirstName}} {{ x.userLastName}}</td>
+                                <td>
+                                    <button type="button" class="btn btn-danger btn-xs"
+                                            ng-click="blockUser(x.userID)" title="Block"><i
+                                            class="fa fa-lock"></i></button>
+                                    <button type="button" class="btn btn-primary btn-xs"
+                                            ng-click="exceptionUser(x.userID, $index)" title="Exception"><i
+                                            class="fa fa-handshake-o"></i></button>
+                                </td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.mail-box-messages -->
+                </div>
+                <!-- /.box-header End : Showing Message Table-->
+                <br>
+            </div>
+            <!-- /. box -->
+        </div>
+        <!-- /.col -->
+    </div>
+
+    <!-- Start : <div class="modal fade" id="composer_modal" ng-init="initialize_users()">-->
+    <!--Start : Sending message-->
+    <div class="modal fade" id="composer_modal" ng-init="initialize_users()">
+        <form ng-submit="send_message()">
+            <div class="modal-dialog">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Compose</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label for="">To</label>
+                                </div>
+                                <div class="col-sm-10">
+                                    <select class="form-control select2" style="width: 100%;" id="username_message_to">
+                                        <option value="">Select a user</option>
+                                        <option value="{{ x.userID}}" ng-if="guser_logged_id !== x.userID"
+                                                ng-repeat="x in users">{{ x.userFirstName}} {{ x.userLastName}}
+                                        </option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label for="">Subject</label>
+                                </div>
+                                <div class="col-sm-10">
+                                <textarea class="form-control" rows="2" required="required"
+                                          ng-model="cm.subject"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <div class="row">
+                                <div class="col-sm-2">
+                                    <label for="">Message</label>
+                                </div>
+                                <div class="col-sm-10">
+                                <textarea class="form-control" rows="10" required="required"
+                                          ng-model="cm.message"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Send</button>
+                    </div>
+                </div><!-- /.modal-content -->
+            </div><!-- /.modal-dialog -->
+        </form>
+    </div><!-- /.modal -->
+    <!-- End : Sending message-->
+    <!-- End : <div class="modal fade" id="composer_modal" ng-init="initialize_users()">-->
+
+    <!--Start : Show Message -->
+    <div class="modal fade" id="single_message_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title">Message</h4>
+                </div>
+                <div class="modal-body" style=" background-color: #ADD7F0 ; ">
+                    <h5 class="modal-title" style=" color : white;">Subject</h5>
+                    <b>{{ single_message.subject}}</b>
+                </div>
+                <div class="modal-body">
+                    {{ single_message.message}}
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!--End : Show Message -->
+</section>

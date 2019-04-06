@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.gobeshonabd.pojos.Follow" table="follow" >
+<!--**************** Start Filed Mapping *****************-->
+    <!--1.     private int follwerIndex; -->
+    <id name="follwerIndex" column="follwerIndex">
+      <generator class="increment"/>
+    </id>
+    <!--private int columnA;-->
+    <property  name="columnA" column="column_a" />
+    <!--private int columnB;-->
+    <property  name="columnB" column="column_b" />
+    <!--private String date="Date";-->    
+    <property  name="date" column="date" />
+<!--**************** End Filed Mapping *****************-->    
+  </class>
+</hibernate-mapping>

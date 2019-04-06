@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.gobeshonabd.pojos.MessageBlock" table="message_block">
+    <!--1. private int message_block_id -->
+    <id name="message_block_id" column="message_block_id" >
+      <generator class="increment"/>
+    </id>
+
+    <!--2.  private int user_who_will_block; -->
+    <property name="user_who_will_block" column="user_who_will_block" />
+
+    <!--3.  private int user_who_will_be_blocked; -->
+    <property name="user_who_will_be_blocked" column="user_who_will_be_blocked" />
+
+    <!--4.  private String date_of_block; -->
+    <property name="date_of_block" column="date_of_block" />
+
+  </class>
+</hibernate-mapping>

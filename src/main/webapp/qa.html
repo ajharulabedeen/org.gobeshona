@@ -1,0 +1,44 @@
+<div ng-controller="qaController" class="row" ng-init="qa_init()">
+    <br><br>
+    <div class="col-sm-10 col-sm-offset-1">
+        <form ng-submit="">
+            <div class="row">
+                <div class="col-sm-2 col-sm-offset-4">
+                    <p class="pull-right" style="font-size: 15px; font-weight: bold; padding-top: 5px">
+                    Search by 
+                    </p>
+                </div>
+                <div class="col-sm-2">
+                    <select style="font-size: 15px; font-weight: bold; margin-top: 5px; width:100%" id="qa_search_type">
+                        <option value="question" selected>Question</option>
+                        <option value="questionType">Question Type</option>
+                        <!-- <option value="articleContent">Content</option> -->
+                    </select>
+                </div>
+                <div class="col-sm-4">
+                    <div class="form-group">
+                        <input type="text" class="form-control" required="required" ng-model="qa.searchbox" ng-change="search()">
+                    </div>
+                </div>
+            </div>
+        </form>
+        <br>
+        <div ng-repeat="x in questions">
+            <div class="box box-primary">
+                <div class="box-body">
+                    <h5>{{ x.questionDate}}</h5>
+                    <h3><a href="#!qa/view/{{x.questionID}}">{{ x.question}}</a></h3>
+                    <h4>{{ x.questionType}}</h4>
+                    <div class="row">
+                        <div class="col-sm-8">
+                            <span>Upvote: {{ x.quesionUpVote}}</span> <span>DownVote: {{ x.quesionDownVote}}</span>
+                        </div>
+                        <div class="col-sm-4">
+                            
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

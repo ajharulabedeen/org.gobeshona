@@ -1,0 +1,102 @@
+<div ng-controller="qaController" ng-init="qa_my_init()" style="padding-top: 10px;">
+    <a class="btn btn-primary btn-flat create-question-btn" ng-click="create_question_modal()">Add New Question &nbsp; <i class="fa fa-plus"></i></a>
+    <div class="box box-primary">
+        <div class="box-body">
+            <table class="table table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <th>#</th>
+                        <th>Question</th>
+                        <th>Type</th>
+                        <th>Description</th>
+                        <th>UpVote</th>
+                        <th>DownVote</th>
+                        <th>Date and Time</th>
+                        <th>Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="x in questions">
+                        <td>{{$index + 1}}</td>
+                        <td><a href="#!qa/view/{{x.questionID}}">{{ x.question}}</a></td>
+                        <td>{{ x.questionType}}</td>
+                        <td>{{ x.questionDescription | limitTo: 20 }}{{x.questionDescription.length > 20 ? '...' : ''}}</td>
+                        <td>{{ x.quesionUpVote}}</td>
+                        <td>{{ x.quesionDownVote}}</td>
+                        <td>{{ x.questionDate}}</td>
+                        <td>
+                            <a class="btn btn-danger btn-sm" title="Delete" ng-click="remove_qa($index, x.questionID)"><i class="fa fa-trash"></i></a>
+                            <a class="btn btn-warning btn-sm" title="Edit" ng-click="update_qa_modal($index, x.questionID)"><i class="fa fa-edit"></i></a>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="qa_update_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form ng-submit="update_qa()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Update Question</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Question</label>
+                            <input type="text" class="form-control" ng-model="up.question">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea class="form-control" ng-model="up.questionDescription"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Type</label>
+                            <input type="text" class="form-control" ng-model="up.questionType">
+                        </div>
+                        <input type="hidden" ng-model="up.questionID">
+                        <input type="hidden" ng-model="up.userID_questionsAskedByUser">
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div class="modal fade" id="question_create_modal">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <form ng-submit="qa_new()">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h4 class="modal-title">Create Question</h4>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="">Question</label>
+                            <input type="text" class="form-control" ng-model="cr.question">
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Description</label>
+                            <textarea class="form-control" ng-model="cr.questionDescription"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="">Type</label>
+                            <input type="text" class="form-control" ng-model="cr.questionType">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </form> 
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping> 
+    
+<!-- ******************* Start DB Fields Mapping *************************-->      
+    <class name="com.gobeshonabd.pojos.User_Roles" table="users_roles">  
+        
+        <!--1.     private int userID; -->        
+        <id name="user_role_id">
+            <generator class="increment"></generator> 
+        </id>
+        
+        <!--2.     private String emailID; -->
+        <property name="username" length="200"/>
+        
+        <property name="role" length="200"/>
+        
+    </class> 
+</hibernate-mapping>
+    
+    
+    
+    
+    
+    

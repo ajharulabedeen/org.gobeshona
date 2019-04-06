@@ -1,0 +1,225 @@
+<div ng-controller="userController" ng-init="single_user_view()">
+    <br><br>
+    <div class="row">
+
+        <!-- Start : user profile public view-->
+        <div class="col-md-3">
+            <!-- Profile Image -->
+            <div class="box box-primary">
+                <div class="box-body box-profile">
+                    <div class="text-center">
+                        <button ng-if="follow_status == 'un-followed'" class="btn btn-primary btn-xs btn-f" ng-click="add_follower()">
+                            <h3 class="profile-username text-center">Follow</h3>
+                        </button>
+                        <button ng-if="follow_status == 'followed'" class="btn btn-danger btn-xs btn-f" ng-click="remove_follower()">
+                            <h3 class="profile-username text-center">UnFollow</h3>
+                        </button>
+                    </div>
+                    <h1 class="profile-username text-center"><b style="color: #01ff70">
+                        <span>{{ user.userFirstName }}</span> <span>{{ user.userLastName }}</span></b>
+                    </h1>
+                    <ul class="list-group list-group-unbordered">
+                        <li class="list-group-item">
+                            <b><span>Contact Info: </span> <span> {{ user.contactInfo }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Join Date: </span> <span> {{ user.joinDate }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Expriences: </span> <span> {{ user.expriences }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Skills: </span> <span> {{ user.skills }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Date-Of-Barth: </span> <span> {{ user.dateOfBarth }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Religious View: </span> <span> {{ user.religiousView }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Address: </span> <span> {{ user.address }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Educational Qualification: </span>
+                                <span> {{ user.educationalQualification }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Total Up vote: </span> <span> {{ user.totalUpVote }}</span></b>
+                        </li>
+                        <li class="list-group-item">
+                            <b><span>Total Down vote: </span> <span> {{ user.totalDownVote }}</span></b>
+                        </li>
+                    </ul>
+                </div>
+                <!-- /.box-body -->
+            </div>
+        </div>
+        <!-- End : user profile public view-->
+
+        <!-- /.col -->
+        <div class="col-md-9">
+            <div class="nav-tabs-custom">
+                <ul class="nav nav-tabs">
+                    <li class="active"><a data-target="#article" data-toggle="tab">Articles</a>
+                    </li>
+                    <li><a data-target="#question" data-toggle="tab">Questions</a>
+                    </li>
+                    <li><a data-target="#followers" data-toggle="tab">Followers</a>
+                    </li>
+                    <li><a data-target="#message" data-toggle="tab">Message</a>
+                    </li>
+                </ul>
+                <div class="tab-content">
+                    <!--Start : Articles of that user-->
+                    <div class="active tab-pane" id="article">
+                        <h3>Articles</h3>
+                        <div ng-repeat="x in articles">
+                            <!--user info bar for article view-->
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <div style="background-color: aquamarine">
+                                        <button style="background-color: aquamarine" class="btn btn-flat">
+                                            Name: {{x.userFirstName }} {{x.userLastName}}
+                                            ---Joined : {{x.joinDate}}
+                                            ---Messaging Interest :{{x.communicationInterest}}
+                                            ---Up vote : {{x.totalUpVote }}
+                                            ---Down Vote : {{x.totalDownVote}}
+                                        </button>
+                                    </div>
+                                    <!--user info bar for article view-->
+                                    <h5><b>Article Date :</b> {{ x.articleDate}}</h5>
+                                    <h3><a href="#!article/view/{{x.articleID}}"> <b> Article Subject :</b> {{
+                                        x.articleSubject}}</a></h3>
+                                    <h4><b>Article Type : </b>{{ x.articleType}}</h4>
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <span>Up vote: {{ x.articleUpvote}}</span>
+                                            <span>Down Vote: {{ x.articleDownvote}}</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End :Articles of that user-->
+
+                    <!-- strat : Questions of that user-->
+                    <div class="tab-pane" id="question">
+                        <h3>Questions</h3>
+                        <div ng-repeat="x in questions">
+                            <div class="panel panel-default">
+                                <div class="panel-body">
+                                    <h5>{{ x.questionDate}}</h5>
+                                    <h3><a href="#!qa/view/{{x.questionID}}">{{ x.question}}</a></h3>
+                                    <h4>{{ x.questionType}}</h4>
+                                    <div class="row">
+                                        <div class="col-sm-8">
+                                            <span>Upvote: {{ x.quesionUpVote}}</span> <span>DownVote: {{ x.quesionDownVote}}</span>
+                                        </div>
+                                        <div class="col-sm-4">
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End : Questions of that user-->
+
+                    <!-- Start : Followers of that user-->
+                    <div class="tab-pane" id="followers">
+                        <h3>Followers</h3>
+
+                        <div ng-init="follower_init()">
+                            <br><br>
+                            <br>
+                            <div class="box box-primary">
+                                <div class="box-body">
+                                    <!-- Start  : table that will show user's followers data-->
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Name</th>
+                                            <th>Join Date</th>
+                                            <th>Skills</th>
+                                            <th>Communication Interest</th>
+                                            <th>Total Articles</th>
+                                            <th>Total Questions</th>
+                                            <th>Total Up Votes</th>
+                                            <th>Total Down Votes</th>
+                                            <th>Interested Fields</th>
+                                        </tr>
+                                        </thead>
+                                        <tbody>
+                                        <tr ng-repeat="x in followers">
+                                            <td>{{$index }}</td>
+                                            <td><a href="#!single/user/view/{{ x.userID }}">{{ x.userFirstName}} {{
+                                                x.userLastName}}</a></td>
+                                            <td>{{ x.joinDate}}</td>
+                                            <td>{{ x.skills}}</td>
+                                            <td>{{ x.communicationInterest}}</td>
+                                            <td>{{ x.totalArticles}}</td>
+                                            <td>{{ x.totalQuestions}}</td>
+                                            <td>{{ x.totalUpVote}}</td>
+                                            <td>{{ x.totalDownVote}}</td>
+                                            <td>{{ x.InterestedFields}}</td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                    <!-- End : table that will show user's followers data-->
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- End : Followers of that user-->
+
+                    <!-- Start : Messages to that user-->
+                    <div class="tab-pane" id="message">
+                        <h3>Messages</h3>
+                        <form ng-submit="send_message()">
+                            <div class="modal-body">
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label for="">Subject</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" rows="2" required="required"
+                                                      ng-model="cm.subject"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <div class="row">
+                                        <div class="col-sm-2">
+                                            <label for="">Message</label>
+                                        </div>
+                                        <div class="col-sm-10">
+                                            <textarea class="form-control" rows="10" required="required"
+                                                                      ng-model="cm.message"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Send</button>
+                            </div>
+                            <!--</div> /.modal-content -->
+                            <!--</div> /.modal-dialog -->
+                        </form>
+                        <!--                            </div> /.modal -->
+                        <!-- End : Sending message-->
+                    </div>
+                    <!-- End : Messages  to that user-->
+                </div>
+
+            </div>
+            <!-- /.tab-content -->
+        </div>
+        <!-- /.nav-tabs-custom -->
+    </div>
+    <!-- /.col -->
+</div>

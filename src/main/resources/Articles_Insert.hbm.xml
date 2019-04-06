@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.gobeshonabd.pojos.Articles_Insert" table="articles">
+<!--**************** Start Filed Mapping *****************-->
+    <!--1. private int articleID;-->
+    <id name="articleID" column="article_id">
+      <generator class="increment"/>
+    </id>
+    <!--2. private String articleSubject;-->
+    <property length="500" name="articleSubject" column="article_subject"/>
+    <!--3. private int articleUpvove;-->
+    <property name="articleUpvote" column="article_up_vote"/>
+    <!--4. private int articleDownvote;-->
+    <property name="articleDownvote" column="article_down_vote"/>
+    <!--5. private String articleDate;-->
+    <property name="articleDate" column="article_date"/>
+    <!--6. private String articleContent;-->
+    <property length="50000" name="articleContent" column="article_content"/>
+    <!--7. private String articleType;-->
+    <property length="100" name="articleType" column="article_type"/>
+    
+    <!-- ******* This is the Extrsa Column ******* -->
+    <property name="userID_articleByUser" column="user_id_article_by_User"/>
+<!--**************** End Filed Mapping *****************-->
+
+
+<!-- ******************* Start DB Relations  Mapping With Article *************************-->
+    <!--Map to QuestionandAnswer Table.-->
+    <!--<set cascade="all" name="articlesComments" lazy="false">-->
+<!--    <set cascade="all" name="articlesComments" >
+      <key column="articleID_Comment"/>
+      <one-to-many class="com.gobeshonabd.pojos.ArticlesComments"/>
+    </set>-->
+<!-- ******************* End DB Relations  Mapping With Article ***************************-->
+
+  </class>
+</hibernate-mapping>

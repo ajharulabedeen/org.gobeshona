@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+"-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping> 
+    
+<!-- ******************* Start DB Fields Mapping *************************-->      
+    <class name="com.gobeshonabd.pojos.Users_Security" table="users_security">  
+        
+        <!--1.     private int userID; -->        
+        <id name="username">
+            <generator class="assigned"></generator> 
+        </id>
+        
+        <!--2.     private String emailID; -->
+        <property name="password" length="200"/>
+        
+        <property name="enabled" length="200"/>
+        
+    </class> 
+</hibernate-mapping>
+    
+    
+    
+    
+    
+    

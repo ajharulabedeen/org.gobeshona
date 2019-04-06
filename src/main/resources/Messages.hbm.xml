@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+  <class name="com.gobeshonabd.pojos.Messages" table="messages">
+    <!--1. private int MessageID-->
+    <id column="message_id" name="MessageID">
+      <generator class="increment"/>
+    </id>
+    <!--2.  private String MessageDate -->
+    <property column="message_date" name="MessageDate"/>
+    <!--3.  private String MessageSenderID, FK, from Table Users-->
+    <property column="message_sender_id" name="messageSenderID"/>
+    <!--4. private int MessageReceiverID, FK, from Table Users-->
+    <property column="message_receiver_id" name="messageReceiverID"/>
+    <!--5. private String Message-->
+    <property column="message" length="5000" name="message"/>
+    <!--6. private int status-->
+    <property column="read_status" name="readStatus"/>
+    <!-- 7.  private String subject  = "Message Subject";-->
+    <property column="subject" name="subject"/>
+  </class>
+</hibernate-mapping>
+
