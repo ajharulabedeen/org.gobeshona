@@ -1,4 +1,5 @@
-package org.gobeshona.dao;
+package org.gobeshona.concrete.dao;
+
 
 import java.util.List;
 
@@ -8,7 +9,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
-import org.gobeshona.entity.Article;
+import org.gobeshona.concrete.entity.Article;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -38,6 +39,7 @@ public class ArticleDAO implements IArticleDAO
     @Override
     public List getAllArticles()
         {
+            System.out.println("GetAll Articles working!");
         String hql = "FROM Article as atcl ORDER BY atcl.articleId";
         String nativeSql = "SELECT articles.category, articles.title FROM articles";
 //        System.out.println("\n nativeSql:" + nativeSql + "\n");

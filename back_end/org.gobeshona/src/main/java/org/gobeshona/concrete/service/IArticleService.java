@@ -1,8 +1,8 @@
-package org.gobeshona.service;
+package org.gobeshona.concrete.service;
 
 import java.util.List;
 
-import org.gobeshona.entity.Article;
+import org.gobeshona.concrete.entity.Article;
 
 public interface IArticleService {
      List<Article> getAllArticles();

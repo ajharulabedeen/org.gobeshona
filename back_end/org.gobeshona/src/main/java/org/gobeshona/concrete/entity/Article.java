@@ -1,4 +1,4 @@
-package org.gobeshona.entity;
+package org.gobeshona.concrete.entity;
 
 import java.io.Serializable;
 

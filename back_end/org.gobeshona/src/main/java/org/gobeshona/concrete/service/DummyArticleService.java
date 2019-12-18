@@ -1,11 +1,13 @@
-package org.gobeshona.service;
+package org.gobeshona.concrete.service;
 
+import org.gobeshona.concrete.dao.IArticleDAO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
-import org.gobeshona.dao.IArticleDAO;
-import org.gobeshona.entity.Article;
+
+import org.gobeshona.concrete.entity.Article;
+
 import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 

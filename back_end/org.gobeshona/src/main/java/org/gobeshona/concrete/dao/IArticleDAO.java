@@ -1,7 +1,7 @@
-package org.gobeshona.dao;
+package org.gobeshona.concrete.dao;
 
 import java.util.List;
-import org.gobeshona.entity.Article;
+import org.gobeshona.concrete.entity.Article;
 import org.springframework.data.repository.CrudRepository;
 
     public interface IArticleDAO 

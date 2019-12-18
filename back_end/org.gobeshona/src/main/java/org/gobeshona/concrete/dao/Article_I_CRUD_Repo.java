@@ -3,9 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.gobeshona.dao;
+package org.gobeshona.concrete.dao;
 
-import org.gobeshona.entity.Article;
+import org.gobeshona.concrete.entity.Article;
 import java.util.List;
 import org.springframework.data.repository.CrudRepository;
 
