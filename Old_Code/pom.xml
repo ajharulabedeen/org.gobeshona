@@ -4,12 +4,12 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>com.gobeshonabd.voteUI</groupId>
-    <artifactId>gobeshonabdfinalVoteUI</artifactId>
+    <artifactId>old_gobeshonabdfinalVoteUI</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <packaging>war</packaging>
     <!--<packaging>jar</packaging>-->
 
-    <name>gobeshonabdfinalVoteUI</name>
+    <name>old_gobeshonabdfinalVoteUI</name>
     <description>gobeshonabd final project for Spring Boot</description>
 
     <parent>
