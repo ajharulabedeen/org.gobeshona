@@ -1,4 +1,4 @@
-package org.gobeshona.utils;
+package org.gobeshona.util;
 
 import java.util.Properties;
 import javax.sql.DataSource;
