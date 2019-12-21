@@ -1,5 +1,5 @@
 
-package org.gobeshona.pojos;
+package org.gobeshona.articles;
 
 public class ArticlesCommentsVotes
     {    

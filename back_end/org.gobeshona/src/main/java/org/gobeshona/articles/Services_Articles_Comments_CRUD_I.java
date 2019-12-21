@@ -5,9 +5,6 @@
  */
 package org.gobeshona.articles;
 
-import org.gobeshona.pojos.ArticlesComments;
-import org.gobeshona.pojos.ArticlesComments_Insert;
-
 /**
  *
  * @author Dell-3460

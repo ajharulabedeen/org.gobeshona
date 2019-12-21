@@ -1,6 +1,4 @@
 package org.gobeshona.articles;
-import org.gobeshona.pojos.ArticlesComments;
-import org.gobeshona.pojos.ArticlesComments_Insert;
 public interface DAO_Articles_Comment_I
     {
 //        String dao_postComment(ArticlesComments_Insert articlesCommentsToPost);

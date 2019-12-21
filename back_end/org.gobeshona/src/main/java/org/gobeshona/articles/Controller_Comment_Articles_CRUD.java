@@ -1,8 +1,6 @@
 package org.gobeshona.articles;
 
 import org.gobeshona.configs.StatusRequestSingleton;
-import org.gobeshona.pojos.ArticlesComments;
-import org.gobeshona.pojos.ArticlesComments_Insert;
 import org.gobeshona.pojos.StatusRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestBody;

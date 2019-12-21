@@ -2,9 +2,6 @@ package org.gobeshona.articles;
 
 import org.gobeshona.configs.GetDate;
 import org.gobeshona.articles.DAO_Articles_I;
-import org.gobeshona.pojos.Articles;
-import org.gobeshona.pojos.Articles_Concise_View;
-import org.gobeshona.pojos.Articles_Insert;
 import java.util.List;
 
 public class Services_Articles_CRUD_Impl implements Services_Articles_CRUD_I

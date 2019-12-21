@@ -1,4 +1,4 @@
-package org.gobeshona.pojos;
+package org.gobeshona.articles;
 
 import java.util.Set;
 import org.hibernate.validator.constraints.Length;

@@ -2,9 +2,6 @@ package org.gobeshona.articles;
 
 import org.gobeshona.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl;
 import org.gobeshona.configs.HibernateUtil;
-import org.gobeshona.pojos.ArticlesComments;
-import org.gobeshona.pojos.ArticlesComments_Insert;
-import org.gobeshona.pojos.Articles_Insert;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.Transaction;

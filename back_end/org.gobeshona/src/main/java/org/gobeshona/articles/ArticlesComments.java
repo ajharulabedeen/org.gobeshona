@@ -1,18 +1,19 @@
-package org.gobeshona.pojos;
+package org.gobeshona.articles;
 
 import org.hibernate.validator.constraints.Length;
 import org.hibernate.validator.constraints.NotEmpty;
 
-public class ArticlesComments_Insert
+public class ArticlesComments
     {
 
 //    ********************* Start of Varriable Declaration *******************
 //    1 ,Auto
     private int commentId;
-//    2  
+//    2  FK, Table name Users
+//    @NotEmpty
     private int userID;
 //    3
-    private String commentDate = "Comment Date";
+    private String commentDate="coment Date";
 //    4
     private int commentUpVote = 0;
 //    5
@@ -20,19 +21,15 @@ public class ArticlesComments_Insert
 //    6, length="2000"
     @NotEmpty
     @Length(max = 2000)
-    private String commentContent = "Comment Content";
-
-// ************** This is extra Column  **************  
-//    7 
-    private int articleID_Comment;
+    private String commentContent = "Artcile Comment content";
 //********************* End of Varriable Declaration *******************
 
-    public ArticlesComments_Insert()
+    public ArticlesComments()
         {
         
         }
 
-    public ArticlesComments_Insert(
+    public ArticlesComments(
             int commentId, 
             int userID, 
             String commentDate, 
@@ -111,18 +108,7 @@ public class ArticlesComments_Insert
         {
         this.commentContent = CommentContent;
         }
-    
-    
-    
-//    ******************* This is for Forign Key ******************* 
-//7  ***************************************************************  
-    public int getArticleID_Comment()
-        {
-        return articleID_Comment;
-        }
 
-    public void setArticleID_Comment(int articleID_Comment)
-        {
-        this.articleID_Comment = articleID_Comment;
-        }
+
+
     }

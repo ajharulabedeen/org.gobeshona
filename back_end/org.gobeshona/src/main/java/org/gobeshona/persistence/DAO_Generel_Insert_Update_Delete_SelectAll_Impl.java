@@ -20,7 +20,7 @@ import org.hibernate.Transaction;
 import org.gobeshona.configs.HibernateUtil;
 import java.util.List;
 import org.hibernate.Query;
-import org.gobeshona.pojos.Articles;
+import org.gobeshona.articles.Articles;
 
 public class DAO_Generel_Insert_Update_Delete_SelectAll_Impl
         implements

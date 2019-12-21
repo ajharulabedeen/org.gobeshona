@@ -2,10 +2,6 @@ package org.gobeshona.articles;
 
 import org.gobeshona.configs.HibernateUtil;
 import org.gobeshona.configs.SpringApplicationContextInterface;
-import org.gobeshona.pojos.ArticleCommnets_with_UserData;
-import org.gobeshona.pojos.Articles;
-import org.gobeshona.pojos.ArticlesComments_Insert;
-import org.gobeshona.pojos.Articles_Insert;
 import org.gobeshona.pojos.Users;
 import java.util.ArrayList;
 import java.util.HashMap;

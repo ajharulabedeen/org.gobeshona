@@ -2,8 +2,6 @@ package org.gobeshona.articles;
 
 import org.gobeshona.configs.GetDate;
 import org.gobeshona.articles.DAO_Articles_Comment_I;
-import org.gobeshona.pojos.ArticlesComments;
-import org.gobeshona.pojos.ArticlesComments_Insert;
 
 public class Services_Articles_Comments_CRUD_Impl
         implements Services_Articles_Comments_CRUD_I

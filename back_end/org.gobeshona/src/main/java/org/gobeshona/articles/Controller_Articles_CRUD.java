@@ -2,8 +2,6 @@ package org.gobeshona.articles;
 
 import org.gobeshona.configs.SpringApplicationContextInterface;
 import org.gobeshona.configs.StatusRequestSingleton;
-import org.gobeshona.pojos.Articles;
-import org.gobeshona.pojos.Articles_Insert;
 import org.gobeshona.pojos.StatusRequest;
 import java.util.List;
 import org.springframework.web.bind.annotation.PathVariable;

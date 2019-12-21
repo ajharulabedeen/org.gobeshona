@@ -3,8 +3,6 @@ package org.gobeshona.articles;
 import org.gobeshona.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl;
 import static org.gobeshona.configs.Get_Bean_Persistence_DAO_Generel_Insert_Update_Delete_Impl.bean_generel_Insert_Update_Delete_SelectAll_I;
 import org.gobeshona.configs.HibernateUtil;
-import org.gobeshona.pojos.Articles;
-import org.gobeshona.pojos.Articles_Insert;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
