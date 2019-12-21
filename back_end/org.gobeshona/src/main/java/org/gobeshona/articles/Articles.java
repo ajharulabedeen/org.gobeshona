@@ -9,6 +9,8 @@ import java.io.Serializable;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
@@ -41,6 +43,7 @@ public class Articles implements Serializable {
     @Basic(optional = false)
     @NotNull
     @Column(name = "article_id")
+    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer articleId;
     @Basic(optional = false)
     @NotNull
@@ -81,6 +84,27 @@ public class Articles implements Serializable {
         this.articleType = articleType;
     }
 
+    public Articles(String articleSubject, String articleContent, String articleType, Integer useridarticlebyUser) {
+        this.articleSubject = articleSubject;
+        this.articleContent = articleContent;
+        this.articleType = articleType;
+        this.useridarticlebyUser = useridarticlebyUser;
+    }
+
+    
+    
+    public Articles(String articleSubject, Integer articleUpVote, Integer articleDownVote, String articleDate, String articleContent, String articleType, Integer useridarticlebyUser) {
+        this.articleSubject = articleSubject;
+        this.articleUpVote = articleUpVote;
+        this.articleDownVote = articleDownVote;
+        this.articleDate = articleDate;
+        this.articleContent = articleContent;
+        this.articleType = articleType;
+        this.useridarticlebyUser = useridarticlebyUser;
+    }
+
+    
+    
     public Integer getArticleId() {
         return articleId;
     }
