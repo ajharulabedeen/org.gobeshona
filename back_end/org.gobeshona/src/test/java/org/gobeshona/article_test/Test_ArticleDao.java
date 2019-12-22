@@ -27,9 +27,9 @@ public class Test_ArticleDao {
 //    
 
     /**
-     *  passing date :  22-12-2019 Sun
+     * passing date : 22-12-2019 Sun
      */
-//    @Test
+    @Test
     public void test_post_Article() {
 //        Articles articles = new Articles(15,"articleSubject", "articleContent", "articleType");
         Articles articles = new Articles("articleSubject", "articleContent", "articleType", 2, DateUtil.getDate().toString());
@@ -37,19 +37,27 @@ public class Test_ArticleDao {
     }
 //    
 
-    @Test
+    /**
+     * @see passed date : 22-12-2019 Sun
+     */
+//    @Test
     public void test_delete_Article() {
         Integer articleId = 3;
         articlePersistence_I.delete_Article(articleId);
     }
 //    
-//    @Test
-//    public void test_edit_Article()
-//    {
-//       Articles articles = new Articles(4L,"Abedeen", "sajib", "momo");
-//       articlePersistence_I.edit_Article(articles);
-//
-//    }
+
+    @Test
+    public void test_edit_Article() {
+        Articles articles = new Articles("articleSubject", "articleContent", "articleType", 2, DateUtil.getDate().toString());
+//        Articles articles = new Articles();
+        articles.setArticleId(new Integer(6));
+        articles.setArticleSubject("Test");
+        articles.setCategory("test, Lie!");
+//        articles.;
+        articlePersistence_I.edit_Article(articles);
+
+    }
 //
 //
 }//Test_ArticlePersistence

@@ -12,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
 import javax.persistence.NamedQueries;
 import javax.persistence.NamedQuery;
 import javax.persistence.Table;
@@ -29,48 +30,53 @@ import javax.xml.bind.annotation.XmlRootElement;
 @NamedQueries({
     @NamedQuery(name = "Articles.findAll", query = "SELECT a FROM Articles a")
     , @NamedQuery(name = "Articles.findByArticleId", query = "SELECT a FROM Articles a WHERE a.articleId = :articleId")
-    , @NamedQuery(name = "Articles.findByArticleSubject", query = "SELECT a FROM Articles a WHERE a.articleSubject = :articleSubject")
-    , @NamedQuery(name = "Articles.findByArticleUpVote", query = "SELECT a FROM Articles a WHERE a.articleUpVote = :articleUpVote")
-    , @NamedQuery(name = "Articles.findByArticleDownVote", query = "SELECT a FROM Articles a WHERE a.articleDownVote = :articleDownVote")
+    , @NamedQuery(name = "Articles.findByCategory", query = "SELECT a FROM Articles a WHERE a.category = :category")
+    , @NamedQuery(name = "Articles.findByTitle", query = "SELECT a FROM Articles a WHERE a.title = :title")
     , @NamedQuery(name = "Articles.findByArticleDate", query = "SELECT a FROM Articles a WHERE a.articleDate = :articleDate")
-    , @NamedQuery(name = "Articles.findByArticleContent", query = "SELECT a FROM Articles a WHERE a.articleContent = :articleContent")
+    , @NamedQuery(name = "Articles.findByArticleDownVote", query = "SELECT a FROM Articles a WHERE a.articleDownVote = :articleDownVote")
+    , @NamedQuery(name = "Articles.findByArticleSubject", query = "SELECT a FROM Articles a WHERE a.articleSubject = :articleSubject")
     , @NamedQuery(name = "Articles.findByArticleType", query = "SELECT a FROM Articles a WHERE a.articleType = :articleType")
+    , @NamedQuery(name = "Articles.findByArticleUpVote", query = "SELECT a FROM Articles a WHERE a.articleUpVote = :articleUpVote")
     , @NamedQuery(name = "Articles.findByUseridarticlebyUser", query = "SELECT a FROM Articles a WHERE a.useridarticlebyUser = :useridarticlebyUser")})
 public class Articles implements Serializable {
 
     private static final long serialVersionUID = 1L;
     @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     @Basic(optional = false)
-    @NotNull
     @Column(name = "article_id")
-    @GeneratedValue(strategy=GenerationType.AUTO)
     private Integer articleId;
+    @Size(max = 255)
+    @Column(name = "category")
+    private String category;
+    @Size(max = 255)
+    @Column(name = "title")
+    private String title;
+    @Lob
+    @Size(max = 16777215)
+    @Column(name = "article_content")
+    private String articleContent;
+    @Size(max = 255)
+    @Column(name = "article_date")
+    private String articleDate;
+    @Column(name = "article_down_vote")
+    private Integer articleDownVote;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 500)
     @Column(name = "article_subject")
     private String articleSubject;
-    @Column(name = "article_up_vote")
-    private Integer articleUpVote;
-    @Column(name = "article_down_vote")
-    private Integer articleDownVote;
-    @Size(max = 255)
-    @Column(name = "article_date")
-    private String articleDate;
-    @Basic(optional = false)
-    @NotNull
-    @Size(min = 1, max = 20000)
-    @Column(name = "article_content")
-    private String articleContent;
     @Basic(optional = false)
     @NotNull
     @Size(min = 1, max = 100)
     @Column(name = "article_type")
     private String articleType;
+    @Column(name = "article_up_vote")
+    private Integer articleUpVote;
     @Column(name = "user_id_article_by_User")
     private Integer useridarticlebyUser;
 
-    public Articles() {
+        public Articles() {
     }
 
     public Articles(Integer articleId) {
@@ -90,6 +96,7 @@ public class Articles implements Serializable {
         this.articleType = articleType;
         this.useridarticlebyUser = useridarticlebyUser;
     }
+    
     public Articles(String articleSubject, String articleContent, String articleType, Integer useridarticlebyUser, String date) {
         this.articleSubject = articleSubject;
         this.articleContent = articleContent;
@@ -97,8 +104,14 @@ public class Articles implements Serializable {
         this.useridarticlebyUser = useridarticlebyUser;
         this.articleDate = date;
     }
-
     
+    public Articles(Integer id,  String articleSubject, String articleContent, String articleType, Integer useridarticlebyUser, String date) {
+        this.articleSubject = articleSubject;
+        this.articleContent = articleContent;
+        this.articleType = articleType;
+        this.useridarticlebyUser = useridarticlebyUser;
+        this.articleDate = date;
+    }
     
     public Articles(String articleSubject, Integer articleUpVote, Integer articleDownVote, String articleDate, String articleContent, String articleType, Integer useridarticlebyUser) {
         this.articleSubject = articleSubject;
@@ -110,8 +123,8 @@ public class Articles implements Serializable {
         this.useridarticlebyUser = useridarticlebyUser;
     }
 
-    
-    
+
+
     public Integer getArticleId() {
         return articleId;
     }
@@ -120,36 +133,20 @@ public class Articles implements Serializable {
         this.articleId = articleId;
     }
 
-    public String getArticleSubject() {
-        return articleSubject;
+    public String getCategory() {
+        return category;
     }
 
-    public void setArticleSubject(String articleSubject) {
-        this.articleSubject = articleSubject;
+    public void setCategory(String category) {
+        this.category = category;
     }
 
-    public Integer getArticleUpVote() {
-        return articleUpVote;
+    public String getTitle() {
+        return title;
     }
 
-    public void setArticleUpVote(Integer articleUpVote) {
-        this.articleUpVote = articleUpVote;
-    }
-
-    public Integer getArticleDownVote() {
-        return articleDownVote;
-    }
-
-    public void setArticleDownVote(Integer articleDownVote) {
-        this.articleDownVote = articleDownVote;
-    }
-
-    public String getArticleDate() {
-        return articleDate;
-    }
-
-    public void setArticleDate(String articleDate) {
-        this.articleDate = articleDate;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
     public String getArticleContent() {
@@ -160,12 +157,44 @@ public class Articles implements Serializable {
         this.articleContent = articleContent;
     }
 
+    public String getArticleDate() {
+        return articleDate;
+    }
+
+    public void setArticleDate(String articleDate) {
+        this.articleDate = articleDate;
+    }
+
+    public Integer getArticleDownVote() {
+        return articleDownVote;
+    }
+
+    public void setArticleDownVote(Integer articleDownVote) {
+        this.articleDownVote = articleDownVote;
+    }
+
+    public String getArticleSubject() {
+        return articleSubject;
+    }
+
+    public void setArticleSubject(String articleSubject) {
+        this.articleSubject = articleSubject;
+    }
+
     public String getArticleType() {
         return articleType;
     }
 
     public void setArticleType(String articleType) {
         this.articleType = articleType;
+    }
+
+    public Integer getArticleUpVote() {
+        return articleUpVote;
+    }
+
+    public void setArticleUpVote(Integer articleUpVote) {
+        this.articleUpVote = articleUpVote;
     }
 
     public Integer getUseridarticlebyUser() {
