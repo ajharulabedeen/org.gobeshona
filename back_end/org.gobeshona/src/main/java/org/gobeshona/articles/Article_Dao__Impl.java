@@ -7,7 +7,7 @@ import javax.transaction.Transactional;
 import org.springframework.stereotype.Repository;
 /**
  *
- * @author Sajib
+ * @author abedeen
  */
 @Repository
 @Transactional
@@ -19,13 +19,12 @@ public class Article_Dao__Impl implements Article_Dao_I
     @Override
     public Articles post_Article(Articles articles)
     {
-        System.out.println("\n---post_Article---\n");
         entityManager.persist(articles);
         return articles;
     }
 
     @Override
-    public void delete_Article(Long articleId) 
+    public void delete_Article(Integer articleId) 
     {
         entityManager.remove(entityManager.find(Articles.class,articleId));
     }

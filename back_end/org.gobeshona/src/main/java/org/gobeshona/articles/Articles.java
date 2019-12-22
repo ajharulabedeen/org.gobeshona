@@ -90,6 +90,13 @@ public class Articles implements Serializable {
         this.articleType = articleType;
         this.useridarticlebyUser = useridarticlebyUser;
     }
+    public Articles(String articleSubject, String articleContent, String articleType, Integer useridarticlebyUser, String date) {
+        this.articleSubject = articleSubject;
+        this.articleContent = articleContent;
+        this.articleType = articleType;
+        this.useridarticlebyUser = useridarticlebyUser;
+        this.articleDate = date;
+    }
 
     
     
