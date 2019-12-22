@@ -42,7 +42,7 @@ public class Test_ArticleDao {
      */
 //    @Test
     public void test_delete_Article() {
-        Integer articleId = 3;
+        Integer articleId = 6;
         articlePersistence_I.delete_Article(articleId);
     }
 //    
