@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { AuthService } from '../../auth/auth.service';
 import { Observable } from 'rxjs';
 
+
 @Component({
   selector: 'app-profile',
   templateUrl: './profile.component.html',
@@ -10,6 +11,8 @@ import { Observable } from 'rxjs';
 })
 export class ProfileComponent implements OnInit {
   constructor(private http: HttpClient, private authService: AuthService) { }
+
+
 
   photoEdit = false;
   selectedFile: File;
