@@ -1,7 +1,8 @@
-package org.gobeshona.articles;
+package org.gobeshona.articles.old;
 
 import java.util.List;
 
+import org.gobeshona.articles.Articles;
 import org.gobeshona.articles.Articles;
 
 public interface IArticleService {

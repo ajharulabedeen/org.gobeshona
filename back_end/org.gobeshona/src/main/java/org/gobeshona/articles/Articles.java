@@ -22,7 +22,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
- * @author G7
+ * @author abedeen
  */
 @Entity
 @Table(name = "articles")
@@ -227,7 +227,7 @@ public class Articles implements Serializable {
 
     @Override
     public String toString() {
-        return "org.gobeshona.articles.Articles[ articleId=" + articleId + " ]";
+        return "Articles{" + "articleId=" + articleId + ", category=" + category + ", title=" + title + ", articleContent=" + articleContent + ", articleDate=" + articleDate + ", articleDownVote=" + articleDownVote + ", articleSubject=" + articleSubject + ", articleType=" + articleType + ", articleUpVote=" + articleUpVote + ", useridarticlebyUser=" + useridarticlebyUser + '}';
     }
-    
+
 }

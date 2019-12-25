@@ -1,4 +1,4 @@
-package org.gobeshona.articles;
+package org.gobeshona.articles.old;
 
 import java.util.List;
 
@@ -8,6 +8,7 @@ import javax.persistence.PersistenceContext;
 import org.springframework.stereotype.Repository;
 import org.springframework.transaction.annotation.Transactional;
 
+import org.gobeshona.articles.Articles;
 import org.gobeshona.articles.Articles;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;

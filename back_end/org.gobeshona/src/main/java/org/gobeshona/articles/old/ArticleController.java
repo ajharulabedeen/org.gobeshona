@@ -1,8 +1,9 @@
-package org.gobeshona.articles;
+package org.gobeshona.articles.old;
 
 import org.gobeshona.articles.Articles;
-import org.gobeshona.articles.IArticleService;
+import org.gobeshona.articles.old.IArticleService;
 import java.util.List;
+import org.gobeshona.articles.Articles;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;

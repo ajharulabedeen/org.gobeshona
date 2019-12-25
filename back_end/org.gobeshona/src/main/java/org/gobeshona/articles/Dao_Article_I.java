@@ -6,7 +6,7 @@ import org.gobeshona.articles.Articles;
  *
  * @author abedeen
  */
-public interface Article_Dao_I 
+public interface Dao_Article_I 
 {
     public Articles post_Article(Articles articles);
     public void delete_Article(Integer articleId);

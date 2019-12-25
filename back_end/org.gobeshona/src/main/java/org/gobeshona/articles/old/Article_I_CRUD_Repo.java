@@ -3,10 +3,11 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package org.gobeshona.articles;
+package org.gobeshona.articles.old;
 
 import org.gobeshona.articles.Articles;
 import java.util.List;
+import org.gobeshona.articles.Articles;
 import org.springframework.data.repository.CrudRepository;
 
 /**

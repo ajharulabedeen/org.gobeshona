@@ -1,10 +1,12 @@
-package org.gobeshona.articles;
+package org.gobeshona.articles.old;
 
-import org.gobeshona.articles.IArticleDAO;
+import org.gobeshona.articles.old.IArticleService;
+import org.gobeshona.articles.old.IArticleDAO;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.gobeshona.articles.Articles;
 import org.gobeshona.articles.Articles;
 
 import org.springframework.beans.factory.annotation.Qualifier;

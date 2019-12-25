@@ -1,6 +1,8 @@
 package org.gobeshona.article_test;
 
-import org.gobeshona.articles.*;
+import org.gobeshona.articles.Articles;
+import org.gobeshona.articles.Dao_Article_I;
+import org.gobeshona.articles.Dao_Article_Impl;
 import org.gobeshona.util.DateUtil;
 import org.junit.Test;
 import static org.junit.Assert.*;
@@ -18,7 +20,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class Test_ArticleDao {
 
     @Autowired
-    Article_Dao_I articlePersistence_I;
+    Dao_Article_I articlePersistence_I;
 //
 //    
 
@@ -34,6 +36,8 @@ public class Test_ArticleDao {
 //        Articles articles = new Articles(15,"articleSubject", "articleContent", "articleType");
         Articles articles = new Articles("articleSubject", "articleContent", "articleType", 2, DateUtil.getDate().toString());
         articlePersistence_I.post_Article(articles);
+//        Dao_Article_Impl article_Impl = new Dao_Article_Impl();
+//        article_Impl.post_Article(articles);
     }
 //    
 
@@ -56,7 +60,6 @@ public class Test_ArticleDao {
         articles.setCategory("test, Lie!");
 //        articles.;
         articlePersistence_I.edit_Article(articles);
-
     }
 //
 //

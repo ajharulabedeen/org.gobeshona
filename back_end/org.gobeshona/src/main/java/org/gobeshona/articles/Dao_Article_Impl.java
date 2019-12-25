@@ -4,14 +4,16 @@ import org.gobeshona.articles.Articles;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Repository;
 /**
  *
  * @author abedeen
  */
+@Component
+@org.springframework.transaction.annotation.Transactional
 @Repository
-@Transactional
-public class Article_Dao__Impl implements Article_Dao_I 
+public class Dao_Article_Impl implements Dao_Article_I 
 {
     @PersistenceContext
     private EntityManager entityManager;
@@ -19,6 +21,7 @@ public class Article_Dao__Impl implements Article_Dao_I
     @Override
     public Articles post_Article(Articles articles)
     {
+        System.out.println("articles : " + articles.toString());
         entityManager.persist(articles);
         return articles;
     }
