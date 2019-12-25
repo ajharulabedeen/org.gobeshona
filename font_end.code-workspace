@@ -1,0 +1,14 @@
+{
+	"folders": [
+		{
+			"path": "back_end/org.gobeshona"
+		},
+		{
+			"path": "font_end"
+		},
+		{
+			"path":"UI"
+		}
+	],
+	"settings": {}
+}
