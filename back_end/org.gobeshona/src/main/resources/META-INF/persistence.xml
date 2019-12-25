@@ -9,6 +9,7 @@
     <class>org.gobeshona.articles.Articles</class>
     <class>org.gobeshona.entity.Developer</class>
     <class>org.gobeshona.entity.Technology</class>
+    <class>org.gobeshona.articles.NewEntity</class>
     <properties>
       <property name="javax.persistence.jdbc.url" value="jdbc:mysql://localhost:3306/gobeshonabd?zeroDateTimeBehavior=convertToNull"/>
       <property name="javax.persistence.jdbc.user" value="root"/>

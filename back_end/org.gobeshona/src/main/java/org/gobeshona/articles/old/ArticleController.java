@@ -21,7 +21,8 @@ import org.springframework.web.util.UriComponentsBuilder;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("user")
+//@RequestMapping("user")
+@RequestMapping("test")
 public class ArticleController {
 
     @Autowired

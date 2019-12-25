@@ -52,10 +52,12 @@ public class Articles implements Serializable {
     @Size(max = 255)
     @Column(name = "title")
     private String title;
+    
     @Lob
     @Size(max = 16777215)
     @Column(name = "article_content")
     private String articleContent;
+    
     @Size(max = 255)
     @Column(name = "article_date")
     private String articleDate;
