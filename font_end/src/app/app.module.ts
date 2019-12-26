@@ -19,7 +19,7 @@ import { MatInputModule, MatPaginatorModule, MatProgressSpinnerModule,
          MatSortModule, MatTableModule, MatButtonModule } from "@angular/material";
 import { DataTableComponent } from './data-table/data-table.component';
 import { FileUploaderTestComponent } from './file-uploader-test/file-uploader-test.component';
-import { PaymentModule } from './payment/payment.module';
+// import { PaymentModule } from './payment/payment.module';
 import { EventModule } from './event/event.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 
@@ -53,7 +53,7 @@ import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
     MatProgressSpinnerModule,
     MatButtonModule,
     MatInputModule,
-    PaymentModule,
+    // PaymentModule,
     EventModule,
     CKEditorModule
 

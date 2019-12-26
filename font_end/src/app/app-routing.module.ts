@@ -10,9 +10,7 @@ import { AuthComponent } from './auth/auth.component';
 import { ProfileComponent } from './profile/profile/profile.component';
 import { TimelineComponent } from './profile/timeline/timeline.component';
 import { FileUploaderTestComponent } from './file-uploader-test/file-uploader-test.component';
-import { PaymentTypeComponent } from './payment/payment-type/payment-type.component';
 import { EventManageComponent } from './event/event-manage/event-manage.component';
-import { PaymentMobileComponent } from './payment/payment-mobile/payment-mobile.component';
 
 
 const routes: Routes = [
@@ -30,8 +28,6 @@ const routes: Routes = [
   { path: 'profile', component: ProfileComponent },
   { path: 'timeline', component: TimelineComponent },
   { path: 'file', component: FileUploaderTestComponent },
-  { path: 'payment', component: PaymentTypeComponent },
-  { path: 'paymentmobile', component: PaymentMobileComponent },
   { path: 'event', component: EventManageComponent },
 ];
 
