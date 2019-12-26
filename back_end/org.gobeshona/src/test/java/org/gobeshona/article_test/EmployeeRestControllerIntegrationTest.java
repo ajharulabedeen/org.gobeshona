@@ -50,7 +50,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
  * @author G7
  */
 @RunWith(SpringRunner.class)
-@WebMvcTest(value = ArticleController.class, secure = false)
+@WebMvcTest(value = ArticleController.class, secure = true)
 @AutoConfigureMockMvc
 public class EmployeeRestControllerIntegrationTest {
 
@@ -63,7 +63,8 @@ public class EmployeeRestControllerIntegrationTest {
     @Test
     public void givenEmployees_whenGetEmployees_thenReturnJsonArray()
             throws Exception {
-        String url = "http://127.0.0.1:8080/test/test";
+//        String url = "http://127.0.0.1:8080/test/test";
+        String url = "/test/test";
         System.out.println("-------------------------Start----------------------------------");
         mvc.perform(get(url)
                 .contentType(MediaType.APPLICATION_JSON)) 

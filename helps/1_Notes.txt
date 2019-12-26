@@ -1,1 +1,14 @@
 1. CKEditor 5 installed.
+but later cancelled due to not able to install plugin there.
+-------------------------
+2. @Lob
+    @Size(max = 16777215)
+    @Column(name = "article_content")
+    private String articleContent;
+	-------------
+	private static final long serialVersionUID = 1L;
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
+3. For testing purpose have to add auto config, Service. 
+	
+  

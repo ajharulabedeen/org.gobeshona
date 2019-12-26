@@ -1,5 +1,6 @@
 package org.gobeshona.articles.old;
 
+import java.util.Date;
 import org.gobeshona.articles.Articles;
 import org.gobeshona.articles.old.IArticleService;
 import java.util.List;
@@ -80,7 +81,7 @@ public class ArticleController {
 //    Start : Added .......
     @GetMapping("test")
     public String test() {
-        return "Alhumdulilah.....!";
+        return "AllOK!" + new Date().toString();
     }
 //    End : Added .......
 

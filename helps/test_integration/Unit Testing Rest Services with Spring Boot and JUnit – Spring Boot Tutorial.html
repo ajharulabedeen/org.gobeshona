@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<!-- saved from url=(0077)https://www.springboottutorial.com/unit-testing-for-spring-boot-rest-services -->
+<html><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8"><style id="stndz-style"></style>
+
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial</title>
+<link rel="dns-prefetch" href="https://maxcdn.bootstrapcdn.com/">
+<link rel="dns-prefetch" href="https://cdn.mathjax.org/">
+<link rel="dns-prefetch" href="https://cdnjs.cloudflare.com/">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Setting up a Basic REST Service with Spring Boot is a cake walk. We will go one step further and add great unit tests to our RESTful Service!">
+<meta name="robots" content="all">
+<meta name="author" content="Ranga Karanam">
+<meta name="keywords" content="SpringBootUnitTesting">
+<link rel="canonical" href="https://www.springboottutorial.com/unit-testing-for-spring-boot-rest-services">
+<link rel="alternate" type="application/rss+xml" title="RSS Feed for Spring Boot Tutorial" href="https://www.springboottutorial.com/feed.xml">
+
+<link rel="stylesheet" href="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/pixyll.css" type="text/css">
+
+<link href="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/css" rel="stylesheet" type="text/css">
+<link href="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/css(1)" rel="stylesheet" type="text/css">
+
+
+
+
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Unit Testing Rest Services with Spring Boot and JUnit">
+<meta property="og:description" content="Spring Boot Tutorials. Hands-on examples. - Basics of Spring Boot. Covers Spring Boot Starter Projects, Spring Initializr, Creating REST Services, Unit and Integration tests, Profiles, Spring Boot Data JPA, Actuator and Security">
+<meta property="og:url" content="https://www.springboottutorial.com/unit-testing-for-spring-boot-rest-services">
+<meta property="og:site_name" content="Spring Boot Tutorial">
+
+<meta name="twitter:card" content="summary">
+<meta name="twitter:site" content="@in28Minutes">
+<meta name="twitter:title" content="Unit Testing Rest Services with Spring Boot and JUnit">
+<meta name="twitter:description" content="Setting up a Basic REST Service with Spring Boot is a cake walk. We will go one step further and add great unit tests to our RESTful Service!">
+<meta name="twitter:url" content="https://www.springboottutorial.com/unit-testing-for-spring-boot-rest-services">
+
+<link rel="apple-touch-icon" sizes="57x57" href="https://www.springboottutorial.com/apple-touch-icon-57x57.png">
+<link rel="apple-touch-icon" sizes="114x114" href="https://www.springboottutorial.com/apple-touch-icon-114x114.png">
+<link rel="apple-touch-icon" sizes="72x72" href="https://www.springboottutorial.com/apple-touch-icon-72x72.png">
+<link rel="apple-touch-icon" sizes="144x144" href="https://www.springboottutorial.com/apple-touch-icon-144x144.png">
+<link rel="apple-touch-icon" sizes="60x60" href="https://www.springboottutorial.com/apple-touch-icon-60x60.png">
+<link rel="apple-touch-icon" sizes="120x120" href="https://www.springboottutorial.com/apple-touch-icon-120x120.png">
+<link rel="apple-touch-icon" sizes="76x76" href="https://www.springboottutorial.com/apple-touch-icon-76x76.png">
+<link rel="apple-touch-icon" sizes="152x152" href="https://www.springboottutorial.com/apple-touch-icon-152x152.png">
+<link rel="apple-touch-icon" sizes="180x180" href="https://www.springboottutorial.com/apple-touch-icon-180x180.png">
+<link rel="icon" type="image/png" href="https://www.springboottutorial.com/favicon-192x192.png" sizes="192x192">
+<link rel="icon" type="image/png" href="https://www.springboottutorial.com/favicon-160x160.png" sizes="160x160">
+<link rel="icon" type="image/png" href="https://www.springboottutorial.com/favicon-96x96.png" sizes="96x96">
+<link rel="icon" type="image/png" href="https://www.springboottutorial.com/favicon-16x16.png" sizes="16x16">
+<link rel="icon" type="image/png" href="https://www.springboottutorial.com/favicon-32x32.png" sizes="32x32">
+<script id="sitekit-sdk" src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/app.js.download"></script><script async="" src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/analytics.js.download"></script><script type="text/javascript">
+       (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+       (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+       m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+       })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+       ga('create', 'UA-32942307-5', 'auto');
+       ga('send', 'pageview');
+    </script>
+<link rel="stylesheet" type="text/css" href="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/2.9e572980c855df5de718.css"><script charset="utf-8" src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/2.bfb5aed3102f13eb1d86.js.download"></script></head>
+<body class="site" style="overflow: auto;">
+<div class="site-wrap">
+<header class="site-header px2 px-responsive">
+<div class="mt2 wrap">
+<div class="measure">
+
+<a href="https://www.springboottutorial.com/"><span style="font-size:15px;color:#4CCCDE">IN</span><span style="font-size:25px;color:#D5492E">28</span><span style="font-size:15px;color:#36BF80">MINUTES</span></a>
+<nav class="site-nav">
+<a href="https://www.springboottutorial.com/tags/#SpringFramework">Spring</a>
+<a href="https://www.springboottutorial.com/tags/">Boot</a>
+<a href="https://www.springboottutorial.com/tags/#SpringBootMicroservices">API</a>
+<a style="background-color: red;color: white;padding: 0.25em 0.25em;text-decoration: none;text-transform: uppercase;" href="https://rebrand.ly/5-day-spring-spring-boot" target="_blank">FREE 5 DAY CHALLENGE</a>
+</nav>
+<div class="clearfix"></div>
+</div>
+</div>
+</header>
+<div class="post p2 p-responsive wrap" role="main">
+<div class="measure">
+<div class="post-header mb2">
+<h1>Unit Testing Rest Services with Spring Boot and JUnit</h1>
+<span class="post-meta">Jan 28, 2017</span><br>
+<span class="post-meta small">
+13 minute read
+</span>
+</div>
+<article class="post-content">
+<p>This guide will help you write great unit tests for your Spring Boot Rest Service. We will use a simple code example creating couple of simple rest services.</p>
+<h2 id="you-will-learn">You will learn</h2>
+<ul>
+<li>What is Unit Testing?</li>
+<li>How to create a Get REST Service for retrieving the courses that a student registered for?</li>
+<li>How to write a unit test for Get REST Service?</li>
+<li>How to create a Post REST Service for registering a course for student?</li>
+<li>How to write a unit test for POST Service?</li>
+</ul>
+<h2 id="tools-you-will-need">Tools you will need</h2>
+<ul>
+<li>Maven 3.0+ is your build tool</li>
+<li>Your favorite IDE. We use Eclipse.</li>
+<li>JDK 1.8+</li>
+</ul>
+<h2 id="complete-maven-project-with-code-examples">Complete Maven Project With Code Examples</h2>
+<blockquote>
+<p>Our Github repository has all the code examples - <a href="https://github.com/in28minutes/in28minutes.github.io/tree/master/code-zip-files" target="_blank">https://github.com/in28minutes/in28minutes.github.io/tree/master/code-zip-files</a></p>
+</blockquote>
+<ul>
+<li>Rest Services with Unit and Integration Tests
+<ul>
+<li>Website-springbootrestservices-simplerestserviceswithunitandintegrationtests.zip</li>
+</ul>
+</li>
+</ul>
+<h2 id="unit-testing">Unit Testing</h2>
+<p>Following screenshot shows eclipse project with all the files we will create.
+<img src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/SpringBootRestService-ProjectStructure.png" alt="Image" title="Spring Boot Rest Services - Project Structure"></p>
+<p>We want to create a unit test for <code class="language-plaintext highlighter-rouge">StudentController</code> which is a Rest Controller. <code class="language-plaintext highlighter-rouge">StudentController</code> exposes two service methods - one Get and one Post. We will write unit tests for both these service methods.</p>
+<p>In the unit test</p>
+<ul>
+<li>We will mock out the StudentService using Mockito</li>
+<li>We will use Mock MVC framework to launch only StudentController.</li>
+</ul>
+<p>A key part of unit testing is to restrict the scope to a minimum. In this unit test, we want to test only the methods in <code class="language-plaintext highlighter-rouge">StudentController</code>.</p>
+<h2 id="overview">Overview</h2>
+<p>Following is the order we do things in this guide:</p>
+<ul>
+<li>Bootstrap a project using Spring Initializr.</li>
+<li>Implement a Business Service for our API - StudentService.</li>
+<li>Implement the API - using StudentController. First we implement the GET methods and then the POST methods.</li>
+<li>Unit Test the API.</li>
+</ul>
+<h2 id="bootstrap-rest-services-application-with-spring-initializr">Bootstrap REST Services Application with Spring Initializr</h2>
+<blockquote>
+<p>Spring Initializr <a href="https://start.spring.io/" target="_blank">http://start.spring.io/</a> is great tool to bootstrap your Spring Boot projects.</p>
+</blockquote>
+<p><img src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/Spring-Initializr-Web.png" alt="Image" title="Web, Actuator and Developer Tools"></p>
+<p>As shown in the image above, following steps have to be done</p>
+<ul>
+<li>Launch Spring Initializr and choose the following
+<ul>
+<li>Choose <code class="language-plaintext highlighter-rouge">com.in28minutes.springboot</code> as Group</li>
+<li>Choose <code class="language-plaintext highlighter-rouge">student-services</code> as Artifact</li>
+<li>Choose following dependencies
+<ul>
+<li>Web</li>
+<li>Actuator</li>
+<li>DevTools</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Click Generate Project.</li>
+<li>Import the project into Eclipse.</li>
+<li>If you want to understand all the files that are part of this project, you can go here.</li>
+</ul>
+<h2 id="implementing-business-service-for-your-application">Implementing Business Service for your Application</h2>
+<p>All applications need data. Instead of talking to a real database, we will use an <code class="language-plaintext highlighter-rouge">ArrayList</code> - kind of an in-memory data store.</p>
+<p>A student can take multiple courses. A course has an id, name, description and a list of steps you need to complete to finish the course. A student has an id, name, description and a list of courses he/she is currently registered for. We have StudentService exposing methods to</p>
+<ul>
+<li><code class="language-plaintext highlighter-rouge">public List&lt;Student&gt; retrieveAllStudents()</code> - Retrieve details for all students</li>
+<li><code class="language-plaintext highlighter-rouge">public Student retrieveStudent(String studentId)</code> - Retrieve a specific student details</li>
+<li><code class="language-plaintext highlighter-rouge">public List&lt;Course&gt; retrieveCourses(String studentId)</code> - Retrieve all courses a student is registered for</li>
+<li><code class="language-plaintext highlighter-rouge">public Course retrieveCourse(String studentId, String courseId)</code> - Retrieve details of a specific course a student is registered for</li>
+<li><code class="language-plaintext highlighter-rouge">public Course addCourse(String studentId, Course course)</code> - Add a course to an existing student</li>
+</ul>
+<p>Refer to these files at the bottom of the article for exact implementation of the Service <code class="language-plaintext highlighter-rouge">StudentService</code> and the model classes <code class="language-plaintext highlighter-rouge">Course</code> and <code class="language-plaintext highlighter-rouge">Student</code>.</p>
+<ul>
+<li>src/main/java/com/in28minutes/springboot/model/Course.java</li>
+<li>src/main/java/com/in28minutes/springboot/model/Student.java</li>
+<li>src/main/java/com/in28minutes/springboot/service/StudentService.java</li>
+</ul>
+<h2 id="adding-couple-of-get-rest-services">Adding Couple of GET Rest Services</h2>
+<p>The Rest Service <code class="language-plaintext highlighter-rouge">StudentController</code> exposes couple of get services.</p>
+<ul>
+<li><code class="language-plaintext highlighter-rouge">@Autowired private StudentService studentService</code> : We are using Spring Autowiring to wire the student service into the StudentController.</li>
+<li><code class="language-plaintext highlighter-rouge">@GetMapping("/students/{studentId}/courses")</code>: Exposing a Get Service with studentId as a path variable</li>
+<li><code class="language-plaintext highlighter-rouge">@GetMapping("/students/{studentId}/courses/{courseId}")</code>: Exposing a Get Service for retrieving specific course of a student.</li>
+<li><code class="language-plaintext highlighter-rouge">@PathVariable String studentId</code>: Value of studentId from the uri will be mapped to this parameter.</li>
+</ul>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.model.Course</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.service.StudentService</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentController</span> <span class="o">{</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="nc">StudentService</span> <span class="n">studentService</span><span class="o">;</span>
+
+	<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/students/{studentId}/courses"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="nf">retrieveCoursesForStudent</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">studentId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">studentService</span><span class="o">.</span><span class="na">retrieveCourses</span><span class="o">(</span><span class="n">studentId</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/students/{studentId}/courses/{courseId}"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">Course</span> <span class="nf">retrieveDetailsForCourse</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">studentId</span><span class="o">,</span>
+			<span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">courseId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">studentService</span><span class="o">.</span><span class="na">retrieveCourse</span><span class="o">(</span><span class="n">studentId</span><span class="o">,</span> <span class="n">courseId</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+<h2 id="executing-the-get-service-using-postman">Executing the Get Service Using Postman</h2>
+<p>We will fire a request to http://localhost:8080/students/Student1/courses/Course1 to test the service. Response is as shown below.</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"id"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Course1"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Spring"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Steps"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Learn Maven"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Import Project"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"First Example"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Second Example"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>Below picture shows how we can execute this Get Service from Postman - my favorite tool to run rest services.
+<img src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/ExecutingGetRestServiceUsingPostman.png" alt="Image" title="Executing Rest Service From Postman"></p>
+<h2 id="unit-testing-the-get-rest-service">Unit Testing the Get Rest Service</h2>
+<p>When we are unit testing a rest service, we would want to launch only the specific controller and the related MVC Components. WebMvcTest annotation is used for unit testing Spring MVC application. This can be used when a test focuses only Spring MVC components. Using this annotation will disable full auto-configuration and only apply configuration relevant to MVC tests.</p>
+<ul>
+<li><code class="language-plaintext highlighter-rouge">@RunWith(SpringRunner.class)</code> : SpringRunner is short hand for SpringJUnit4ClassRunner which extends BlockJUnit4ClassRunner providing the functionality to launch a Spring TestContext Framework.</li>
+<li><code class="language-plaintext highlighter-rouge">@WebMvcTest(value = StudentController.class, secure = false)</code>: WebMvcTest annotation is used for unit testing Spring MVC application. This can be used when a test focuses only Spring MVC components. In this test, we want to launch only StudentController. All other controllers and mappings will not be launched when this unit test is executed.</li>
+<li><code class="language-plaintext highlighter-rouge">@Autowired private MockMvc mockMvc</code>: MockMvc is the main entry point for server-side Spring MVC test support. It allows us to execute requests against the test context.</li>
+<li><code class="language-plaintext highlighter-rouge">@MockBean private StudentService studentService</code>: MockBean is used to add mocks to a Spring ApplicationContext. A mock of studentService is created and auto-wired into the StudentController.</li>
+<li><code class="language-plaintext highlighter-rouge">Mockito.when(studentService.retrieveCourse(Mockito.anyString(),Mockito.anyString())).thenReturn(mockCourse)</code>: Mocking the method retrieveCourse to return the specific mockCourse when invoked.</li>
+<li><code class="language-plaintext highlighter-rouge">MockMvcRequestBuilders.get("/students/Student1/courses/Course1").accept(MediaType.APPLICATION_JSON)</code>: Creating a Request builder to be able to execute a get request to uri “/students/Student1/courses/Course1” with accept header as “application/json”</li>
+<li><code class="language-plaintext highlighter-rouge">mockMvc.perform(requestBuilder).andReturn()</code>: mockMvc is used to perform the request and return the response back.</li>
+<li><code class="language-plaintext highlighter-rouge">JSONAssert.assertEquals(expected, result.getResponse().getContentAsString(), false)</code>: We are using org.skyscreamer.jsonassert.JSONAssert. This allows us to do partial asserts against a JSON String. We are passing strict as false since we do not want to check for all fields in the response.</li>
+</ul>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.Mockito</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.skyscreamer.jsonassert.JSONAssert</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.mock.mockito.MockBean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.context.junit4.SpringRunner</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.MvcResult</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.RequestBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.model.Course</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.service.StudentService</span><span class="o">;</span>
+
+<span class="nd">@RunWith</span><span class="o">(</span><span class="nc">SpringRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@WebMvcTest</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="nc">StudentController</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">secure</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentControllerTest</span> <span class="o">{</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="nc">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
+
+	<span class="nd">@MockBean</span>
+	<span class="kd">private</span> <span class="nc">StudentService</span> <span class="n">studentService</span><span class="o">;</span>
+
+	<span class="nc">Course</span> <span class="n">mockCourse</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Course</span><span class="o">(</span><span class="s">"Course1"</span><span class="o">,</span> <span class="s">"Spring"</span><span class="o">,</span> <span class="s">"10 Steps"</span><span class="o">,</span>
+			<span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Learn Maven"</span><span class="o">,</span> <span class="s">"Import Project"</span><span class="o">,</span> <span class="s">"First Example"</span><span class="o">,</span>
+					<span class="s">"Second Example"</span><span class="o">));</span>
+
+	<span class="nc">String</span> <span class="n">exampleCourseJson</span> <span class="o">=</span> <span class="s">"{\"name\":\"Spring\",\"description\":\"10 Steps\",\"steps\":[\"Learn Maven\",\"Import Project\",\"First Example\",\"Second Example\"]}"</span><span class="o">;</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retrieveDetailsForCourse</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+		<span class="nc">Mockito</span><span class="o">.</span><span class="na">when</span><span class="o">(</span>
+				<span class="n">studentService</span><span class="o">.</span><span class="na">retrieveCourse</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">anyString</span><span class="o">(),</span>
+						<span class="nc">Mockito</span><span class="o">.</span><span class="na">anyString</span><span class="o">())).</span><span class="na">thenReturn</span><span class="o">(</span><span class="n">mockCourse</span><span class="o">);</span>
+
+		<span class="nc">RequestBuilder</span> <span class="n">requestBuilder</span> <span class="o">=</span> <span class="nc">MockMvcRequestBuilders</span><span class="o">.</span><span class="na">get</span><span class="o">(</span>
+				<span class="s">"/students/Student1/courses/Course1"</span><span class="o">).</span><span class="na">accept</span><span class="o">(</span>
+				<span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">);</span>
+
+		<span class="nc">MvcResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span><span class="n">requestBuilder</span><span class="o">).</span><span class="na">andReturn</span><span class="o">();</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getResponse</span><span class="o">());</span>
+		<span class="nc">String</span> <span class="n">expected</span> <span class="o">=</span> <span class="s">"{id:Course1,name:Spring,description:10 Steps}"</span><span class="o">;</span>
+
+		<span class="c1">// {"id":"Course1","name":"Spring","description":"10 Steps, 25 Examples and 10K Students","steps":["Learn Maven","Import Project","First Example","Second Example"]}</span>
+
+		<span class="nc">JSONAssert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">expected</span><span class="o">,</span> <span class="n">result</span><span class="o">.</span><span class="na">getResponse</span><span class="o">()</span>
+				<span class="o">.</span><span class="na">getContentAsString</span><span class="o">(),</span> <span class="kc">false</span><span class="o">);</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+
+</code></pre></div></div>
+<h2 id="adding-a-post-rest-service">Adding a POST Rest Service</h2>
+<p>A POST Service should return a status of created (201) when the resource creation is successful.</p>
+<p><code class="language-plaintext highlighter-rouge">@PostMapping("/students/{studentId}/courses")</code>: Mapping a url for the POST Request
+<code class="language-plaintext highlighter-rouge">@RequestBody Course newCourse</code>: Using Binding to bind the body of the request to Course object.
+<code class="language-plaintext highlighter-rouge">ResponseEntity.created(location).build()</code>: Return a status of created. Also return the location of created resource as a Response Header.</p>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/students/{studentId}/courses"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Void</span><span class="o">&gt;</span> <span class="nf">registerStudentForCourse</span><span class="o">(</span>
+			<span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">studentId</span><span class="o">,</span> <span class="nd">@RequestBody</span> <span class="nc">Course</span> <span class="n">newCourse</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="nc">Course</span> <span class="n">course</span> <span class="o">=</span> <span class="n">studentService</span><span class="o">.</span><span class="na">addCourse</span><span class="o">(</span><span class="n">studentId</span><span class="o">,</span> <span class="n">newCourse</span><span class="o">);</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="n">course</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+			<span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">noContent</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+
+		<span class="no">URI</span> <span class="n">location</span> <span class="o">=</span> <span class="nc">ServletUriComponentsBuilder</span><span class="o">.</span><span class="na">fromCurrentRequest</span><span class="o">().</span><span class="na">path</span><span class="o">(</span>
+				<span class="s">"/{id}"</span><span class="o">).</span><span class="na">buildAndExpand</span><span class="o">(</span><span class="n">course</span><span class="o">.</span><span class="na">getId</span><span class="o">()).</span><span class="na">toUri</span><span class="o">();</span>
+
+		<span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">created</span><span class="o">(</span><span class="n">location</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+	<span class="o">}</span>
+
+</code></pre></div></div>
+<h2 id="executing-a-post-rest-service">Executing a POST Rest Service</h2>
+<p>Example Request is shown below. It contains all the details to register a course to a student.</p>
+<div class="language-json highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="p">{</span><span class="w">
+  </span><span class="nl">"name"</span><span class="p">:</span><span class="w"> </span><span class="s2">"Microservices"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"description"</span><span class="p">:</span><span class="w"> </span><span class="s2">"10 Steps"</span><span class="p">,</span><span class="w">
+  </span><span class="nl">"steps"</span><span class="p">:</span><span class="w"> </span><span class="p">[</span><span class="w">
+    </span><span class="s2">"Learn How to Break Things Up"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Automate the hell out of everything"</span><span class="p">,</span><span class="w">
+    </span><span class="s2">"Have fun"</span><span class="w">
+  </span><span class="p">]</span><span class="w">
+</span><span class="p">}</span><span class="w">
+</span></code></pre></div></div>
+<p>Below picture shows how we can execute this Post Service from Postman - my favorite tool to run rest services. Make sure you go to the Body tab and select raw. Select JSON from the dropdown. Copy above request into body.</p>
+<p>The URL we use is http://localhost:8080/students/Student1/courses.</p>
+<p><img src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/ExecutingPostRestServiceUsingPostman.png" alt="Image" title="Executing Post Rest Service From Postman"></p>
+<h2 id="writing-unit-test-for-the-post-rest-service">Writing Unit Test for the POST Rest Service</h2>
+<p>In the unit test, we would want to post the request body to the url <code class="language-plaintext highlighter-rouge">/students/Student1/courses</code>. In the response, we check for HttpStatus of Created and that the location header contains the url of the created resource.</p>
+<ul>
+<li><code class="language-plaintext highlighter-rouge">MockMvcRequestBuilders.post("/students/Student1/courses").accept(MediaType.APPLICATION_JSON)</code>: Create a post request with an accept header for <code class="language-plaintext highlighter-rouge">application\json</code></li>
+<li><code class="language-plaintext highlighter-rouge">content(exampleCourseJson).contentType(MediaType.APPLICATION_JSON)</code>: Use the specified content as body of the request and set content type header.</li>
+<li><code class="language-plaintext highlighter-rouge">assertEquals(HttpStatus.CREATED.value(), response.getStatus())</code>: Assert that the return status is CREATED.</li>
+<li><code class="language-plaintext highlighter-rouge">response.getHeader(HttpHeaders.LOCATION)</code>: Get the location from response header and later assert that it contains the URI of the created resource.</li>
+</ul>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code>	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">createStudentCourse</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+		<span class="nc">Course</span> <span class="n">mockCourse</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Course</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"Smallest Number"</span><span class="o">,</span> <span class="s">"1"</span><span class="o">,</span>
+				<span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"4"</span><span class="o">));</span>
+
+		<span class="c1">// studentService.addCourse to respond back with mockCourse</span>
+		<span class="nc">Mockito</span><span class="o">.</span><span class="na">when</span><span class="o">(</span>
+				<span class="n">studentService</span><span class="o">.</span><span class="na">addCourse</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">anyString</span><span class="o">(),</span>
+						<span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">Course</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">thenReturn</span><span class="o">(</span><span class="n">mockCourse</span><span class="o">);</span>
+
+		<span class="c1">// Send course as body to /students/Student1/courses</span>
+		<span class="nc">RequestBuilder</span> <span class="n">requestBuilder</span> <span class="o">=</span> <span class="nc">MockMvcRequestBuilders</span>
+				<span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"/students/Student1/courses"</span><span class="o">)</span>
+				<span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">).</span><span class="na">content</span><span class="o">(</span><span class="n">exampleCourseJson</span><span class="o">)</span>
+				<span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">);</span>
+
+		<span class="nc">MvcResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span><span class="n">requestBuilder</span><span class="o">).</span><span class="na">andReturn</span><span class="o">();</span>
+
+		<span class="nc">MockHttpServletResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getResponse</span><span class="o">();</span>
+
+		<span class="n">assertEquals</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">.</span><span class="na">value</span><span class="o">(),</span> <span class="n">response</span><span class="o">.</span><span class="na">getStatus</span><span class="o">());</span>
+
+		<span class="n">assertEquals</span><span class="o">(</span><span class="s">"http://localhost/students/Student1/courses/1"</span><span class="o">,</span>
+				<span class="n">response</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="nc">HttpHeaders</span><span class="o">.</span><span class="na">LOCATION</span><span class="o">));</span>
+
+	<span class="o">}</span>
+
+</code></pre></div></div>
+<h2 id="complete-code-example">Complete Code Example</h2>
+<h3 id="pomxml">pom.xml</h3>
+<div class="language-xml highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="cp">&lt;?xml version="1.0" encoding="UTF-8"?&gt;</span>
+<span class="nt">&lt;project</span> <span class="na">xmlns=</span><span class="s">"http://maven.apache.org/POM/4.0.0"</span> <span class="na">xmlns:xsi=</span><span class="s">"http://www.w3.org/2001/XMLSchema-instance"</span>
+	<span class="na">xsi:schemaLocation=</span><span class="s">"http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd"</span><span class="nt">&gt;</span>
+	<span class="nt">&lt;modelVersion&gt;</span>4.0.0<span class="nt">&lt;/modelVersion&gt;</span>
+
+	<span class="nt">&lt;groupId&gt;</span>com.in28minutes.springboot<span class="nt">&lt;/groupId&gt;</span>
+	<span class="nt">&lt;artifactId&gt;</span>student-services<span class="nt">&lt;/artifactId&gt;</span>
+	<span class="nt">&lt;version&gt;</span>0.0.1-SNAPSHOT<span class="nt">&lt;/version&gt;</span>
+	<span class="nt">&lt;packaging&gt;</span>jar<span class="nt">&lt;/packaging&gt;</span>
+
+	<span class="nt">&lt;name&gt;</span>student-services<span class="nt">&lt;/name&gt;</span>
+	<span class="nt">&lt;description&gt;</span>Demo project for Spring Boot<span class="nt">&lt;/description&gt;</span>
+
+	<span class="nt">&lt;parent&gt;</span>
+		<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+		<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-parent<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;version&gt;</span>1.4.4.RELEASE<span class="nt">&lt;/version&gt;</span>
+		<span class="nt">&lt;relativePath/&gt;</span> <span class="c">&lt;!-- lookup parent from repository --&gt;</span>
+	<span class="nt">&lt;/parent&gt;</span>
+
+	<span class="nt">&lt;properties&gt;</span>
+		<span class="nt">&lt;project.build.sourceEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.build.sourceEncoding&gt;</span>
+		<span class="nt">&lt;project.reporting.outputEncoding&gt;</span>UTF-8<span class="nt">&lt;/project.reporting.outputEncoding&gt;</span>
+		<span class="nt">&lt;java.version&gt;</span>1.8<span class="nt">&lt;/java.version&gt;</span>
+	<span class="nt">&lt;/properties&gt;</span>
+
+	<span class="nt">&lt;dependencies&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-actuator<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-web<span class="nt">&lt;/artifactId&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-devtools<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;scope&gt;</span>runtime<span class="nt">&lt;/scope&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+		<span class="nt">&lt;dependency&gt;</span>
+			<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+			<span class="nt">&lt;artifactId&gt;</span>spring-boot-starter-test<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;scope&gt;</span>test<span class="nt">&lt;/scope&gt;</span>
+		<span class="nt">&lt;/dependency&gt;</span>
+	<span class="nt">&lt;/dependencies&gt;</span>
+
+	<span class="nt">&lt;build&gt;</span>
+		<span class="nt">&lt;plugins&gt;</span>
+			<span class="nt">&lt;plugin&gt;</span>
+				<span class="nt">&lt;groupId&gt;</span>org.springframework.boot<span class="nt">&lt;/groupId&gt;</span>
+				<span class="nt">&lt;artifactId&gt;</span>spring-boot-maven-plugin<span class="nt">&lt;/artifactId&gt;</span>
+			<span class="nt">&lt;/plugin&gt;</span>
+		<span class="nt">&lt;/plugins&gt;</span>
+	<span class="nt">&lt;/build&gt;</span>
+
+
+<span class="nt">&lt;/project&gt;</span>
+</code></pre></div></div>
+<hr>
+<h3 id="srcmainjavacomin28minutesspringbootcontrollerstudentcontrollerjava">src/main/java/com/in28minutes/springboot/controller/StudentController.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.net.URI</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.ResponseEntity</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.GetMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PathVariable</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.PostMapping</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RequestBody</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.bind.annotation.RestController</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.web.servlet.support.ServletUriComponentsBuilder</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.model.Course</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.service.StudentService</span><span class="o">;</span>
+
+<span class="nd">@RestController</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentController</span> <span class="o">{</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="nc">StudentService</span> <span class="n">studentService</span><span class="o">;</span>
+
+	<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/students/{studentId}/courses"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="nf">retrieveCoursesForStudent</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">studentId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">studentService</span><span class="o">.</span><span class="na">retrieveCourses</span><span class="o">(</span><span class="n">studentId</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@GetMapping</span><span class="o">(</span><span class="s">"/students/{studentId}/courses/{courseId}"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">Course</span> <span class="nf">retrieveDetailsForCourse</span><span class="o">(</span><span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">studentId</span><span class="o">,</span>
+			<span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">courseId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">studentService</span><span class="o">.</span><span class="na">retrieveCourse</span><span class="o">(</span><span class="n">studentId</span><span class="o">,</span> <span class="n">courseId</span><span class="o">);</span>
+	<span class="o">}</span>
+	
+	<span class="nd">@PostMapping</span><span class="o">(</span><span class="s">"/students/{studentId}/courses"</span><span class="o">)</span>
+	<span class="kd">public</span> <span class="nc">ResponseEntity</span><span class="o">&lt;</span><span class="nc">Void</span><span class="o">&gt;</span> <span class="nf">registerStudentForCourse</span><span class="o">(</span>
+			<span class="nd">@PathVariable</span> <span class="nc">String</span> <span class="n">studentId</span><span class="o">,</span> <span class="nd">@RequestBody</span> <span class="nc">Course</span> <span class="n">newCourse</span><span class="o">)</span> <span class="o">{</span>
+
+		<span class="nc">Course</span> <span class="n">course</span> <span class="o">=</span> <span class="n">studentService</span><span class="o">.</span><span class="na">addCourse</span><span class="o">(</span><span class="n">studentId</span><span class="o">,</span> <span class="n">newCourse</span><span class="o">);</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="n">course</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+			<span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">noContent</span><span class="o">().</span><span class="na">build</span><span class="o">();</span>
+
+		<span class="no">URI</span> <span class="n">location</span> <span class="o">=</span> <span class="nc">ServletUriComponentsBuilder</span><span class="o">.</span><span class="na">fromCurrentRequest</span><span class="o">().</span><span class="na">path</span><span class="o">(</span>
+				<span class="s">"/{id}"</span><span class="o">).</span><span class="na">buildAndExpand</span><span class="o">(</span><span class="n">course</span><span class="o">.</span><span class="na">getId</span><span class="o">()).</span><span class="na">toUri</span><span class="o">();</span>
+
+		<span class="k">return</span> <span class="nc">ResponseEntity</span><span class="o">.</span><span class="na">created</span><span class="o">(</span><span class="n">location</span><span class="o">).</span><span class="na">build</span><span class="o">();</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+<h3 id="srcmainjavacomin28minutesspringbootmodelcoursejava">src/main/java/com/in28minutes/springboot/model/Course.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">model</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Course</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">steps</span><span class="o">;</span>
+
+	<span class="c1">// Needed by Caused by: com.fasterxml.jackson.databind.JsonMappingException:</span>
+	<span class="c1">// Can not construct instance of com.in28minutes.springboot.model.Course:</span>
+	<span class="c1">// no suitable constructor found, can not deserialize from Object value</span>
+	<span class="c1">// (missing default constructor or creator, or perhaps need to add/enable</span>
+	<span class="c1">// type information?)</span>
+	<span class="kd">public</span> <span class="nf">Course</span><span class="o">()</span> <span class="o">{</span>
+
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nf">Course</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">description</span><span class="o">,</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="n">steps</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">();</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">steps</span> <span class="o">=</span> <span class="n">steps</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">description</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">String</span><span class="o">&gt;</span> <span class="nf">getSteps</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">steps</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span>
+				<span class="s">"Course [id=%s, name=%s, description=%s, steps=%s]"</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span> <span class="n">name</span><span class="o">,</span>
+				<span class="n">description</span><span class="o">,</span> <span class="n">steps</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">int</span> <span class="nf">hashCode</span><span class="o">()</span> <span class="o">{</span>
+		<span class="kd">final</span> <span class="kt">int</span> <span class="n">prime</span> <span class="o">=</span> <span class="mi">31</span><span class="o">;</span>
+		<span class="kt">int</span> <span class="n">result</span> <span class="o">=</span> <span class="mi">1</span><span class="o">;</span>
+		<span class="n">result</span> <span class="o">=</span> <span class="n">prime</span> <span class="o">*</span> <span class="n">result</span> <span class="o">+</span> <span class="o">((</span><span class="n">id</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">?</span> <span class="mi">0</span> <span class="o">:</span> <span class="n">id</span><span class="o">.</span><span class="na">hashCode</span><span class="o">());</span>
+		<span class="k">return</span> <span class="n">result</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="kt">boolean</span> <span class="nf">equals</span><span class="o">(</span><span class="nc">Object</span> <span class="n">obj</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">if</span> <span class="o">(</span><span class="k">this</span> <span class="o">==</span> <span class="n">obj</span><span class="o">)</span>
+			<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">obj</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span>
+			<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">getClass</span><span class="o">()</span> <span class="o">!=</span> <span class="n">obj</span><span class="o">.</span><span class="na">getClass</span><span class="o">())</span>
+			<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+		<span class="nc">Course</span> <span class="n">other</span> <span class="o">=</span> <span class="o">(</span><span class="nc">Course</span><span class="o">)</span> <span class="n">obj</span><span class="o">;</span>
+		<span class="k">if</span> <span class="o">(</span><span class="n">id</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">id</span> <span class="o">!=</span> <span class="kc">null</span><span class="o">)</span>
+				<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+		<span class="o">}</span> <span class="k">else</span> <span class="k">if</span> <span class="o">(!</span><span class="n">id</span><span class="o">.</span><span class="na">equals</span><span class="o">(</span><span class="n">other</span><span class="o">.</span><span class="na">id</span><span class="o">))</span>
+			<span class="k">return</span> <span class="kc">false</span><span class="o">;</span>
+		<span class="k">return</span> <span class="kc">true</span><span class="o">;</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+<h3 id="srcmainjavacomin28minutesspringbootmodelstudentjava">src/main/java/com/in28minutes/springboot/model/Student.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">model</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">Student</span> <span class="o">{</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">id</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">name</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">String</span> <span class="n">description</span><span class="o">;</span>
+	<span class="kd">private</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="n">courses</span><span class="o">;</span>
+
+	<span class="kd">public</span> <span class="nf">Student</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">,</span> <span class="nc">String</span> <span class="n">name</span><span class="o">,</span> <span class="nc">String</span> <span class="n">description</span><span class="o">,</span>
+			<span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="n">courses</span><span class="o">)</span> <span class="o">{</span>
+		<span class="kd">super</span><span class="o">();</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">courses</span> <span class="o">=</span> <span class="n">courses</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getId</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setId</span><span class="o">(</span><span class="nc">String</span> <span class="n">id</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">id</span> <span class="o">=</span> <span class="n">id</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getName</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setName</span><span class="o">(</span><span class="nc">String</span> <span class="n">name</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">name</span> <span class="o">=</span> <span class="n">name</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">getDescription</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">description</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setDescription</span><span class="o">(</span><span class="nc">String</span> <span class="n">description</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">description</span> <span class="o">=</span> <span class="n">description</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="nf">getCourses</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">courses</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">setCourses</span><span class="o">(</span><span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="n">courses</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">this</span><span class="o">.</span><span class="na">courses</span> <span class="o">=</span> <span class="n">courses</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Override</span>
+	<span class="kd">public</span> <span class="nc">String</span> <span class="nf">toString</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="nc">String</span><span class="o">.</span><span class="na">format</span><span class="o">(</span>
+				<span class="s">"Student [id=%s, name=%s, description=%s, courses=%s]"</span><span class="o">,</span> <span class="n">id</span><span class="o">,</span>
+				<span class="n">name</span><span class="o">,</span> <span class="n">description</span><span class="o">,</span> <span class="n">courses</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+<h3 id="srcmainjavacomin28minutesspringbootservicestudentservicejava">src/main/java/com/in28minutes/springboot/service/StudentService.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">service</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.math.BigInteger</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.security.SecureRandom</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.ArrayList</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">java.util.List</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.stereotype.Component</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.model.Course</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.model.Student</span><span class="o">;</span>
+
+<span class="nd">@Component</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentService</span> <span class="o">{</span>
+
+	<span class="kd">private</span> <span class="kd">static</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="n">students</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;();</span>
+
+	<span class="kd">static</span> <span class="o">{</span>
+		<span class="c1">//Initialize Data</span>
+		<span class="nc">Course</span> <span class="n">course1</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Course</span><span class="o">(</span><span class="s">"Course1"</span><span class="o">,</span> <span class="s">"Spring"</span><span class="o">,</span> <span class="s">"10 Steps"</span><span class="o">,</span> <span class="nc">Arrays</span>
+				<span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Learn Maven"</span><span class="o">,</span> <span class="s">"Import Project"</span><span class="o">,</span> <span class="s">"First Example"</span><span class="o">,</span>
+						<span class="s">"Second Example"</span><span class="o">));</span>
+		<span class="nc">Course</span> <span class="n">course2</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Course</span><span class="o">(</span><span class="s">"Course2"</span><span class="o">,</span> <span class="s">"Spring MVC"</span><span class="o">,</span> <span class="s">"10 Examples"</span><span class="o">,</span>
+				<span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Learn Maven"</span><span class="o">,</span> <span class="s">"Import Project"</span><span class="o">,</span> <span class="s">"First Example"</span><span class="o">,</span>
+						<span class="s">"Second Example"</span><span class="o">));</span>
+		<span class="nc">Course</span> <span class="n">course3</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Course</span><span class="o">(</span><span class="s">"Course3"</span><span class="o">,</span> <span class="s">"Spring Boot"</span><span class="o">,</span> <span class="s">"6K Students"</span><span class="o">,</span>
+				<span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Learn Maven"</span><span class="o">,</span> <span class="s">"Learn Spring"</span><span class="o">,</span>
+						<span class="s">"Learn Spring MVC"</span><span class="o">,</span> <span class="s">"First Example"</span><span class="o">,</span> <span class="s">"Second Example"</span><span class="o">));</span>
+		<span class="nc">Course</span> <span class="n">course4</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Course</span><span class="o">(</span><span class="s">"Course4"</span><span class="o">,</span> <span class="s">"Maven"</span><span class="o">,</span>
+				<span class="s">"Most popular maven course on internet!"</span><span class="o">,</span> <span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span>
+						<span class="s">"Pom.xml"</span><span class="o">,</span> <span class="s">"Build Life Cycle"</span><span class="o">,</span> <span class="s">"Parent POM"</span><span class="o">,</span>
+						<span class="s">"Importing into Eclipse"</span><span class="o">));</span>
+
+		<span class="nc">Student</span> <span class="n">ranga</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Student1"</span><span class="o">,</span> <span class="s">"Ranga Karanam"</span><span class="o">,</span>
+				<span class="s">"Hiker, Programmer and Architect"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span>
+						<span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">course1</span><span class="o">,</span> <span class="n">course2</span><span class="o">,</span> <span class="n">course3</span><span class="o">,</span> <span class="n">course4</span><span class="o">)));</span>
+
+		<span class="nc">Student</span> <span class="n">satish</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Student</span><span class="o">(</span><span class="s">"Student2"</span><span class="o">,</span> <span class="s">"Satish T"</span><span class="o">,</span>
+				<span class="s">"Hiker, Programmer and Architect"</span><span class="o">,</span> <span class="k">new</span> <span class="nc">ArrayList</span><span class="o">&lt;&gt;(</span><span class="nc">Arrays</span>
+						<span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="n">course1</span><span class="o">,</span> <span class="n">course2</span><span class="o">,</span> <span class="n">course3</span><span class="o">,</span> <span class="n">course4</span><span class="o">)));</span>
+
+		<span class="n">students</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">ranga</span><span class="o">);</span>
+		<span class="n">students</span><span class="o">.</span><span class="na">add</span><span class="o">(</span><span class="n">satish</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Student</span><span class="o">&gt;</span> <span class="nf">retrieveAllStudents</span><span class="o">()</span> <span class="o">{</span>
+		<span class="k">return</span> <span class="n">students</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">Student</span> <span class="nf">retrieveStudent</span><span class="o">(</span><span class="nc">String</span> <span class="n">studentId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="k">for</span> <span class="o">(</span><span class="nc">Student</span> <span class="n">student</span> <span class="o">:</span> <span class="n">students</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">student</span><span class="o">.</span><span class="na">getId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">studentId</span><span class="o">))</span> <span class="o">{</span>
+				<span class="k">return</span> <span class="n">student</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+		<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">List</span><span class="o">&lt;</span><span class="nc">Course</span><span class="o">&gt;</span> <span class="nf">retrieveCourses</span><span class="o">(</span><span class="nc">String</span> <span class="n">studentId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Student</span> <span class="n">student</span> <span class="o">=</span> <span class="n">retrieveStudent</span><span class="o">(</span><span class="n">studentId</span><span class="o">);</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="n">student</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="n">student</span><span class="o">.</span><span class="na">getCourses</span><span class="o">();</span>
+	<span class="o">}</span>
+
+	<span class="kd">public</span> <span class="nc">Course</span> <span class="nf">retrieveCourse</span><span class="o">(</span><span class="nc">String</span> <span class="n">studentId</span><span class="o">,</span> <span class="nc">String</span> <span class="n">courseId</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Student</span> <span class="n">student</span> <span class="o">=</span> <span class="n">retrieveStudent</span><span class="o">(</span><span class="n">studentId</span><span class="o">);</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="n">student</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="k">for</span> <span class="o">(</span><span class="nc">Course</span> <span class="n">course</span> <span class="o">:</span> <span class="n">student</span><span class="o">.</span><span class="na">getCourses</span><span class="o">())</span> <span class="o">{</span>
+			<span class="k">if</span> <span class="o">(</span><span class="n">course</span><span class="o">.</span><span class="na">getId</span><span class="o">().</span><span class="na">equals</span><span class="o">(</span><span class="n">courseId</span><span class="o">))</span> <span class="o">{</span>
+				<span class="k">return</span> <span class="n">course</span><span class="o">;</span>
+			<span class="o">}</span>
+		<span class="o">}</span>
+
+		<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+	<span class="o">}</span>
+
+	<span class="kd">private</span> <span class="nc">SecureRandom</span> <span class="n">random</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">SecureRandom</span><span class="o">();</span>
+
+	<span class="kd">public</span> <span class="nc">Course</span> <span class="nf">addCourse</span><span class="o">(</span><span class="nc">String</span> <span class="n">studentId</span><span class="o">,</span> <span class="nc">Course</span> <span class="n">course</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">Student</span> <span class="n">student</span> <span class="o">=</span> <span class="n">retrieveStudent</span><span class="o">(</span><span class="n">studentId</span><span class="o">);</span>
+
+		<span class="k">if</span> <span class="o">(</span><span class="n">student</span> <span class="o">==</span> <span class="kc">null</span><span class="o">)</span> <span class="o">{</span>
+			<span class="k">return</span> <span class="kc">null</span><span class="o">;</span>
+		<span class="o">}</span>
+
+		<span class="nc">String</span> <span class="n">randomId</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">BigInteger</span><span class="o">(</span><span class="mi">130</span><span class="o">,</span> <span class="n">random</span><span class="o">).</span><span class="na">toString</span><span class="o">(</span><span class="mi">32</span><span class="o">);</span>
+		<span class="n">course</span><span class="o">.</span><span class="na">setId</span><span class="o">(</span><span class="n">randomId</span><span class="o">);</span>
+
+		<span class="n">student</span><span class="o">.</span><span class="na">getCourses</span><span class="o">().</span><span class="na">add</span><span class="o">(</span><span class="n">course</span><span class="o">);</span>
+
+		<span class="k">return</span> <span class="n">course</span><span class="o">;</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+<h3 id="srcmainjavacomin28minutesspringbootstudentservicesapplicationjava">src/main/java/com/in28minutes/springboot/StudentServicesApplication.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.springframework.boot.SpringApplication</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.autoconfigure.SpringBootApplication</span><span class="o">;</span>
+
+<span class="nd">@SpringBootApplication</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentServicesApplication</span> <span class="o">{</span>
+
+	<span class="kd">public</span> <span class="kd">static</span> <span class="kt">void</span> <span class="nf">main</span><span class="o">(</span><span class="nc">String</span><span class="o">[]</span> <span class="n">args</span><span class="o">)</span> <span class="o">{</span>
+		<span class="nc">SpringApplication</span><span class="o">.</span><span class="na">run</span><span class="o">(</span><span class="nc">StudentServicesApplication</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">args</span><span class="o">);</span>
+	<span class="o">}</span>
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+<h3 id="srcmainresourcesapplicationproperties">src/main/resources/application.properties</h3>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code></code></pre></div></div>
+<hr>
+<h3 id="srctestjavacomin28minutesspringbootcontrollerstudentcontrollertestjava">src/test/java/com/in28minutes/springboot/controller/StudentControllerTest.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">.</span><span class="na">controller</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">static</span> <span class="n">org</span><span class="o">.</span><span class="na">junit</span><span class="o">.</span><span class="na">Assert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">java.util.Arrays</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.mockito.Mockito</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.skyscreamer.jsonassert.JSONAssert</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.beans.factory.annotation.Autowired</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.mock.mockito.MockBean</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpHeaders</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.HttpStatus</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.http.MediaType</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.mock.web.MockHttpServletResponse</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.context.junit4.SpringRunner</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.MockMvc</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.MvcResult</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.RequestBuilder</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.web.servlet.request.MockMvcRequestBuilders</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.model.Course</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">com.in28minutes.springboot.service.StudentService</span><span class="o">;</span>
+
+<span class="nd">@RunWith</span><span class="o">(</span><span class="nc">SpringRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@WebMvcTest</span><span class="o">(</span><span class="n">value</span> <span class="o">=</span> <span class="nc">StudentController</span><span class="o">.</span><span class="na">class</span><span class="o">,</span> <span class="n">secure</span> <span class="o">=</span> <span class="kc">false</span><span class="o">)</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentControllerTest</span> <span class="o">{</span>
+
+	<span class="nd">@Autowired</span>
+	<span class="kd">private</span> <span class="nc">MockMvc</span> <span class="n">mockMvc</span><span class="o">;</span>
+
+	<span class="nd">@MockBean</span>
+	<span class="kd">private</span> <span class="nc">StudentService</span> <span class="n">studentService</span><span class="o">;</span>
+
+	<span class="nc">Course</span> <span class="n">mockCourse</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Course</span><span class="o">(</span><span class="s">"Course1"</span><span class="o">,</span> <span class="s">"Spring"</span><span class="o">,</span> <span class="s">"10 Steps"</span><span class="o">,</span>
+			<span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"Learn Maven"</span><span class="o">,</span> <span class="s">"Import Project"</span><span class="o">,</span> <span class="s">"First Example"</span><span class="o">,</span>
+					<span class="s">"Second Example"</span><span class="o">));</span>
+
+	<span class="nc">String</span> <span class="n">exampleCourseJson</span> <span class="o">=</span> <span class="s">"{\"name\":\"Spring\",\"description\":\"10 Steps\",\"steps\":[\"Learn Maven\",\"Import Project\",\"First Example\",\"Second Example\"]}"</span><span class="o">;</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">retrieveDetailsForCourse</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+
+		<span class="nc">Mockito</span><span class="o">.</span><span class="na">when</span><span class="o">(</span>
+				<span class="n">studentService</span><span class="o">.</span><span class="na">retrieveCourse</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">anyString</span><span class="o">(),</span>
+						<span class="nc">Mockito</span><span class="o">.</span><span class="na">anyString</span><span class="o">())).</span><span class="na">thenReturn</span><span class="o">(</span><span class="n">mockCourse</span><span class="o">);</span>
+
+		<span class="nc">RequestBuilder</span> <span class="n">requestBuilder</span> <span class="o">=</span> <span class="nc">MockMvcRequestBuilders</span><span class="o">.</span><span class="na">get</span><span class="o">(</span>
+				<span class="s">"/students/Student1/courses/Course1"</span><span class="o">).</span><span class="na">accept</span><span class="o">(</span>
+				<span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">);</span>
+
+		<span class="nc">MvcResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span><span class="n">requestBuilder</span><span class="o">).</span><span class="na">andReturn</span><span class="o">();</span>
+
+		<span class="nc">System</span><span class="o">.</span><span class="na">out</span><span class="o">.</span><span class="na">println</span><span class="o">(</span><span class="n">result</span><span class="o">.</span><span class="na">getResponse</span><span class="o">());</span>
+		<span class="nc">String</span> <span class="n">expected</span> <span class="o">=</span> <span class="s">"{id:Course1,name:Spring,description:10 Steps}"</span><span class="o">;</span>
+
+		<span class="c1">// {"id":"Course1","name":"Spring","description":"10 Steps, 25 Examples and 10K Students","steps":["Learn Maven","Import Project","First Example","Second Example"]}</span>
+
+		<span class="nc">JSONAssert</span><span class="o">.</span><span class="na">assertEquals</span><span class="o">(</span><span class="n">expected</span><span class="o">,</span> <span class="n">result</span><span class="o">.</span><span class="na">getResponse</span><span class="o">()</span>
+				<span class="o">.</span><span class="na">getContentAsString</span><span class="o">(),</span> <span class="kc">false</span><span class="o">);</span>
+	<span class="o">}</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">createStudentCourse</span><span class="o">()</span> <span class="kd">throws</span> <span class="nc">Exception</span> <span class="o">{</span>
+		<span class="nc">Course</span> <span class="n">mockCourse</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">Course</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"Smallest Number"</span><span class="o">,</span> <span class="s">"1"</span><span class="o">,</span>
+				<span class="nc">Arrays</span><span class="o">.</span><span class="na">asList</span><span class="o">(</span><span class="s">"1"</span><span class="o">,</span> <span class="s">"2"</span><span class="o">,</span> <span class="s">"3"</span><span class="o">,</span> <span class="s">"4"</span><span class="o">));</span>
+
+		<span class="c1">// studentService.addCourse to respond back with mockCourse</span>
+		<span class="nc">Mockito</span><span class="o">.</span><span class="na">when</span><span class="o">(</span>
+				<span class="n">studentService</span><span class="o">.</span><span class="na">addCourse</span><span class="o">(</span><span class="nc">Mockito</span><span class="o">.</span><span class="na">anyString</span><span class="o">(),</span>
+						<span class="nc">Mockito</span><span class="o">.</span><span class="na">any</span><span class="o">(</span><span class="nc">Course</span><span class="o">.</span><span class="na">class</span><span class="o">))).</span><span class="na">thenReturn</span><span class="o">(</span><span class="n">mockCourse</span><span class="o">);</span>
+
+		<span class="c1">// Send course as body to /students/Student1/courses</span>
+		<span class="nc">RequestBuilder</span> <span class="n">requestBuilder</span> <span class="o">=</span> <span class="nc">MockMvcRequestBuilders</span>
+				<span class="o">.</span><span class="na">post</span><span class="o">(</span><span class="s">"/students/Student1/courses"</span><span class="o">)</span>
+				<span class="o">.</span><span class="na">accept</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">).</span><span class="na">content</span><span class="o">(</span><span class="n">exampleCourseJson</span><span class="o">)</span>
+				<span class="o">.</span><span class="na">contentType</span><span class="o">(</span><span class="nc">MediaType</span><span class="o">.</span><span class="na">APPLICATION_JSON</span><span class="o">);</span>
+
+		<span class="nc">MvcResult</span> <span class="n">result</span> <span class="o">=</span> <span class="n">mockMvc</span><span class="o">.</span><span class="na">perform</span><span class="o">(</span><span class="n">requestBuilder</span><span class="o">).</span><span class="na">andReturn</span><span class="o">();</span>
+
+		<span class="nc">MockHttpServletResponse</span> <span class="n">response</span> <span class="o">=</span> <span class="n">result</span><span class="o">.</span><span class="na">getResponse</span><span class="o">();</span>
+
+		<span class="n">assertEquals</span><span class="o">(</span><span class="nc">HttpStatus</span><span class="o">.</span><span class="na">CREATED</span><span class="o">.</span><span class="na">value</span><span class="o">(),</span> <span class="n">response</span><span class="o">.</span><span class="na">getStatus</span><span class="o">());</span>
+
+		<span class="n">assertEquals</span><span class="o">(</span><span class="s">"http://localhost/students/Student1/courses/1"</span><span class="o">,</span>
+				<span class="n">response</span><span class="o">.</span><span class="na">getHeader</span><span class="o">(</span><span class="nc">HttpHeaders</span><span class="o">.</span><span class="na">LOCATION</span><span class="o">));</span>
+
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+<h3 id="srctestjavacomin28minutesspringbootstudentservicesapplicationtestsjava">src/test/java/com/in28minutes/springboot/StudentServicesApplicationTests.java</h3>
+<div class="language-java highlighter-rouge"><div class="highlight"><pre class="highlight"><code><span class="kn">package</span> <span class="n">com</span><span class="o">.</span><span class="na">in28minutes</span><span class="o">.</span><span class="na">springboot</span><span class="o">;</span>
+
+<span class="kn">import</span> <span class="nn">org.junit.Test</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.junit.runner.RunWith</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.boot.test.context.SpringBootTest</span><span class="o">;</span>
+<span class="kn">import</span> <span class="nn">org.springframework.test.context.junit4.SpringRunner</span><span class="o">;</span>
+
+<span class="nd">@RunWith</span><span class="o">(</span><span class="nc">SpringRunner</span><span class="o">.</span><span class="na">class</span><span class="o">)</span>
+<span class="nd">@SpringBootTest</span>
+<span class="kd">public</span> <span class="kd">class</span> <span class="nc">StudentServicesApplicationTests</span> <span class="o">{</span>
+
+	<span class="nd">@Test</span>
+	<span class="kd">public</span> <span class="kt">void</span> <span class="nf">contextLoads</span><span class="o">()</span> <span class="o">{</span>
+	<span class="o">}</span>
+
+<span class="o">}</span>
+</code></pre></div></div>
+<hr>
+</article>
+<div class="py2 post-footer">
+<hr>
+<b>300,000 learners</b> learn and re-skill with our <b>amazing</b> courses. <a target="_blank" href="https://rebrand.ly/in28minutes-try-free-course"> <br> Try a <b>FREE COURSE</b> Now!</a>
+<hr>
+</div>
+<div>
+<h3>in28Minutes Learning Paths</h3>
+<ul>
+<li><a href="https://rebrand.ly/in28minutes-LP-01" target="_blank">Learning Path 01 - Spring and Spring Boot Web Applications and API Developer</a></li>
+<li><a href="https://rebrand.ly/in28minutes-LP-02" target="_blank">Learning Path 02 - Full Stack Developer with Spring Boot, React &amp; Angular</a></li>
+<li><a href="https://rebrand.ly/in28minutes-LP-03" target="_blank">Learning Path 03 - Java Cloud Microservices Developer with Spring Boot, Docker and Kubernetes</a></li>
+<li><a href="https://rebrand.ly/in28minutes-LP-04" target="_blank">Learning Path 04 - Java Cloud Web Developer with Spring Boot, AWS, Azure and PCF</a></li>
+<li><a href="https://rebrand.ly/in28minutes-LP-05" target="_blank">Learning Path 05 - Java AWS Expert with Microservices, Docker and Kubernetes</a></li>
+</ul>
+<hr>
+</div>
+<h3 class="related-post-title">Related Posts</h3>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/spring-boot-projects-with-code-examples" class="post-link">
+<h4 class="post-title">20+ Spring Boot Projects with Code Examples</h4>
+<p class="post-summary">At in28Minutes, we have created more than 20 projects with code examples on Github. We have 50+ articles explaining these projects. These code examples will you learn and gain expertise at Spring Boot.</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/spring-boot-tutorials-for-beginners" class="post-link">
+<h4 class="post-title">Spring Boot Tutorials for Beginners</h4>
+<p class="post-summary">At in28Minutes, we are creating a number of tutorials with videos, articles &amp; courses on Spring Boot for Beginners and Experienced Developers. This resources will help you learn and gain expertise at Spring Boot.</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/creating-microservices-with-spring-boot-part-1-getting-started" class="post-link">
+<h4 class="post-title">Microservices with Spring Boot and Java - Part 1 - Getting Started</h4>
+<p class="post-summary">Let's learn the basics of microservices and microservices architectures. We will also start looking at a basic implementation of a microservice with Spring Boot. We will create a couple of microservices and get them to talk to each other using Eureka Naming Server and Ribbon for Client Side Load Balancing. In part 1 of this series, lets get introduced to the concept of microservices and understand how to create great microservices with Spring Boot and Spring Cloud.</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/spring-boot-video-tutorials-for-beginners" class="post-link">
+<h4 class="post-title">Spring and Spring Boot Video Tutorials for Beginners</h4>
+<p class="post-summary">At in28Minutes, we are creating a number of tutorials with videos, articles &amp; courses on Spring Boot for Beginners and Experienced Developers. Here's a list of video tutorials and courses for you</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/spring-boot-react-full-stack-crud-maven-application" class="post-link">
+<h4 class="post-title">Creating Spring Boot and React Java Full Stack Application with Maven</h4>
+<p class="post-summary">This guide helps you create a Java full stack application with all the CRUD (Create, Read, Update and Delete) features using React as Frontend framework and Spring Boot as the backend REST API. We use Maven as the build tool.</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/spring-boot-unit-testing-and-mocking-with-mockito-and-junit" class="post-link">
+<h4 class="post-title">Spring Boot - Unit Testing and Mocking with Mockito and JUnit</h4>
+<p class="post-summary">Learn the basics of JUnit and Mockito. We will Spring Boot to create a Business Service and Data Services. We will unit test the Business Service using Spring Boot, Mockito and JUnit in two different approaches.</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/introduction-to-spring-data-with-spring-boot" class="post-link">
+<h4 class="post-title">Introduction to Spring Data - Spring Data JPA, Spring Data REST and MongoDB</h4>
+<p class="post-summary">Spring Data's mission is to provide a familiar and consistent, Spring-based programming model for data access. In this tutorial, we will explore the different interfaces provided by Spring Data. We will take a quick peek into Spring Data JPA and Spring Data for MongoDB.</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/hibernate-jpa-tutorial-with-spring-boot-starter-jpa" class="post-link">
+<h4 class="post-title">Integrating Hibernate and JPA with Spring Boot</h4>
+<p class="post-summary">Learn using Spring Boot Starter JPA to connect Spring Boot to H2 (in memory database) using Hibernate/JPA. You will learn the basics of JPA and Hibernate - Entities and Keys. We will create a simple repository extending JPARepository and explore different methods it exposes.</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/introduction-to-web-services-with-soap-and-rest" class="post-link">
+<h4 class="post-title">Introduction to Web Services - Restful and SOAP</h4>
+<p class="post-summary">Introduction to Web Services - Restful and SOAP, This tutorial will help you understand the basics of web services and the different kinds of web services - REST and SOAP.</p>
+</a>
+</div>
+<div class="post ml2">
+<a href="https://www.springboottutorial.com/spring-boot-vs-spring-mvc-vs-spring" class="post-link">
+<h4 class="post-title">Spring Boot vs Spring MVC vs Spring - How do they compare?</h4>
+<p class="post-summary">How does Spring Boot compare with Spring MVC and Spring? What is Spring Boot? What is Spring MVC? What is Spring Framework? What are their goals? How do they compare?</p>
+</a>
+</div>
+</div>
+</div>
+</div>
+<footer class="center">
+<div class="measure">
+<small>
+300,000 Learners are doing our awesome <a href="https://github.com/in28minutes/learn#best-selling-courses" target="_blank">best selling courses</a>.
+</small>
+</div>
+</footer>
+<script type="text/javascript">
+  (function(d, id) {
+    if (d.getElementById(id)) return;
+    var sc, node = d.getElementsByTagName('script')[0];
+    sc = d.createElement('script'); sc.id = id;
+    sc.src = 'https://sdk.getsitekit.com/static/js/app.js#apiKey=d0d17d08019d7d5be4b934641e09d220';
+    node.parentNode.insertBefore(sc, node);
+  }(document, 'sitekit-sdk'));
+</script>
+
+
+
+<div class="sitekit-page-block popup_default" data-vue-instance="3851577259305413"><div><div class="sitekit-popup-base-layout" style="display: none;"><iframe id="popup-basic-container" name="sitekitPopupIframe" scrolling="no" frameborder="0" class="popup-basic-container" src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/saved_resource.html"></iframe></div> <div class="sitekit-active-button" style="display: none;"><iframe id="active-button-basic-container" scrolling="no" frameborder="0" class="active-button-basic-container right_bottom" src="./Unit Testing Rest Services with Spring Boot and JUnit – Spring Boot Tutorial_files/saved_resource(1).html"></iframe></div></div><!----></div></body></html>

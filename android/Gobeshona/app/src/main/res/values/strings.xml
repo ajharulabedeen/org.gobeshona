@@ -1,0 +1,5 @@
+<resources>
+    <string name="app_name">Gobeshona</string>
+    <string name="tab_text_1">New Questions</string>
+    <string name="tab_text_2">Answered Questions</string>
+</resources>
