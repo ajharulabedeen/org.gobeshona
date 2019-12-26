@@ -12,6 +12,7 @@ import { TimelineComponent } from './profile/timeline/timeline.component';
 import { FileUploaderTestComponent } from './file-uploader-test/file-uploader-test.component';
 import { EventManageComponent } from './event/event-manage/event-manage.component';
 import { RecordRtcComponent } from './record-rtc/record-rtc.component';
+import { RecordClearComponent } from './record-clear/record-clear.component';
 
 
 const routes: Routes = [
@@ -31,6 +32,7 @@ const routes: Routes = [
   { path: 'file', component: FileUploaderTestComponent },
   { path: 'event', component: EventManageComponent },
   { path: 'record', component: RecordRtcComponent },
+  { path: 'rec', component: RecordClearComponent },
 ];
 
 @NgModule({

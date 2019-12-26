@@ -23,7 +23,7 @@ import { FileUploaderTestComponent } from './file-uploader-test/file-uploader-te
 import { EventModule } from './event/event.module';
 import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
 import { RecordRtcComponent } from './record-rtc/record-rtc.component';
-// import * as RecordRTC from 'recordrtc';
+import { RecordClearComponent } from './record-clear/record-clear.component';
 
 
 @NgModule({
@@ -33,7 +33,8 @@ import { RecordRtcComponent } from './record-rtc/record-rtc.component';
     AuthComponent,
     DataTableComponent,
     FileUploaderTestComponent,
-    RecordRtcComponent
+    RecordRtcComponent,
+    RecordClearComponent
     // AuthService
   ],
   imports: [
@@ -59,6 +60,7 @@ import { RecordRtcComponent } from './record-rtc/record-rtc.component';
     // PaymentModule,
     EventModule,
     CKEditorModule,
+    BrowserModule,
     // RecordRTC
 
     // NgModel

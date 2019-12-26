@@ -44,6 +44,8 @@ export class RecordRtcComponent {
       mimeType: "audio/mp3",
       numberOfAudioChannels: 1
     };
+    this.record = null;
+   this.url = null;
     //Start Actuall Recording
     var StereoAudioRecorder = RecordRTC.StereoAudioRecorder;
     this.record = new StereoAudioRecorder(stream, options);
@@ -61,6 +63,7 @@ export class RecordRtcComponent {
    * @param  {any} blob Blog
    */
   processRecording(blob) {
+
     this.url = URL.createObjectURL(blob);
   }
   /**
