@@ -4,8 +4,20 @@
   <button class="cancel-button" *ngIf="!isRecording && blobUrl" (click)="clearRecordedData()">Clear Recording</button>
   <div *ngIf="isRecording && !blobUrl"> {{recordedTime}} </div>
   <div>
-  <audio *ngIf="!isRecording && blobUrl"  controls>
-    <source [src]="blobUrl" type="audio/webm">
-  </audio>
+    <audio *ngIf="!isRecording && blobUrl" controls>
+      <source [src]="blobUrl" type="audio/webm">
+    </audio>
+
+    <div>
+      <ul>
+        <li style="text-align: center;" *ngFor="let r of recording; let i=index">
+          {{i+1}}
+          <br>
+          <audio controls>
+            <source [src]="r" type="audio/webm">
+          </audio>
+        </li>
+      </ul>
+    </div>
   </div>
 </div>

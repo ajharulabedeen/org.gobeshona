@@ -1,6 +1,6 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { AudioRecordingService } from './audio-recording.service';
 import { DomSanitizer } from '@angular/platform-browser';
+import { AudioRecordingService } from './audio-recording.service';
 
 @Component({
   selector: 'app-record-clear',
@@ -12,6 +12,8 @@ export class RecordClearComponent implements OnDestroy {
   isRecording = false;
   recordedTime;
   blobUrl;
+  recording = new Array();
+
 
   constructor(private audioRecordingService: AudioRecordingService, private sanitizer: DomSanitizer) {
 
@@ -50,6 +52,9 @@ export class RecordClearComponent implements OnDestroy {
   }
 
   clearRecordedData() {
+    console.log(this.blobUrl);
+    this.recording.push(this.blobUrl);
+    console.log("Length : " + this.recording.length);
     this.blobUrl = null;
   }
 
